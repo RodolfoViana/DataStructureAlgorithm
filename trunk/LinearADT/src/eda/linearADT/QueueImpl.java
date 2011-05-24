@@ -5,7 +5,7 @@ package eda.linearADT;
  * 
  * Equipe:
  * Layse Sobreira - 21115289
- * Renan Pinto -
+ * Renan Pinto - 
  * Rodolfo Viana -
  * Talita Lobo - 
  * 
