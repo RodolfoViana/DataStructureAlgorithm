@@ -13,6 +13,7 @@ package eda.linearADT;
  */
 import eda.util.ADTOverflowException;
 import eda.util.ADTUnderflowException;
+import eda.util.Constants;
 
 /**
  * Fila que guarda elementos seguindo a politica FIFO. Implementar com array puro.
@@ -30,26 +31,43 @@ public class QueueImpl<E> implements Queue<E> {
 	private int index;
 	private int[] array;
 
+	public QueueImpl(){
+		array = new int[Constants.INITIAL_SIZE_OF_STRUCTURE];
+	}
+	
 	@Override
 	public void enqueue(E element) throws ADTOverflowException{
-		// TODO Auto-generated method stub
+		if(full()){
+			throw new ADTOverflowException();
+		}
 
 	}
 
 	@Override
 	public E dequeue() throws ADTUnderflowException{
-		// TODO Auto-generated method stub
+		if(isEmpty()){
+			throw new ADTUnderflowException();
+		}
 		return null;
 	}
 
+	/**
+	 * Retorna o elemento posicionado no inicio da fila.
+	 */
 	@Override
 	public E head() {
+		if(isEmpty()){
+//			throw new ADTUnderflowException();
+		}
 		return null;
 	}
 
+	/**
+	 * Retorna o tamanho da fila.
+	 */
 	@Override
 	public int size(){
-		return 0;
+		return array.length;
 	} 
 	
 	/**
