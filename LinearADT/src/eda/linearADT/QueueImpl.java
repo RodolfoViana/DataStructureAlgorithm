@@ -7,7 +7,7 @@ package eda.linearADT;
  * Layse Sobreira - 21115289
  * Renan Pinto -
  * Rodolfo Viana -
- * Talita Lobo -
+ * Talita Lobo - 
  * 
  * Implementacao da Classe Fila
  */
