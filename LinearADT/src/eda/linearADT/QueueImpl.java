@@ -27,7 +27,9 @@ import eda.util.ADTUnderflowException;
  */
 public class QueueImpl<E> implements Queue<E> {
 
-	
+	private int index;
+	private int[] array;
+
 	@Override
 	public void enqueue(E element) throws ADTOverflowException{
 		// TODO Auto-generated method stub
@@ -42,26 +44,28 @@ public class QueueImpl<E> implements Queue<E> {
 
 	@Override
 	public E head() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public int size(){
-		// TODO Auto-generated method stub
 		return 0;
 	} 
 	
+	/**
+	 * Verifica se a fila esta vazia.
+	 */
 	@Override
 	public boolean isEmpty() {
-		// TODO Auto-generated method stub
-		return false;
+		return index == -1;
 	}
 
+	/**
+	 * Verifica se a fila esta cheia.
+	 */
 	@Override
 	public boolean full() {
-		// TODO Auto-generated method stub
-		return false;
+		return index + 1 == array.length;
 	}
 
 	@Override
