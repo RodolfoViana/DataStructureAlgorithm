@@ -1,14 +1,14 @@
 package eda.linearADT;
 
 /**
- * Projeto de Lab de Est. de Dados
+ * Universidade Federal de Campina Grande
+ * Projetos de Laboratorio de Estrutura de Dados
  * 
- * Equipe:
- * Layse Sobreira - 21115289
- * Renan Pinto - 
- * Rodolfo Viana -
- * Talita Lobo - 
- * 
+ * Equipe:  Layse Sobreira
+ * 			Renan Pinto
+ * 			Rodolfo Viana
+ * 			Talita Lobo
+ *  
  * Implementacao da Classe Fila
  */
 import eda.util.ADTOverflowException;
