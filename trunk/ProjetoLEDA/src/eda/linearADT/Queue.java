@@ -24,7 +24,7 @@ public interface Queue<E> {
 	 * Returns the element of a queue without removing it. If the queue is empty dequeue returns a
 	 * specific exception. 
 	 */
-	public E head();
+	public E head() throws ADTUnderflowException;
 	
 	/**
 	 * Returns the how much elements are in the structure.  
