@@ -79,8 +79,8 @@ public class QueueImpl<E> implements Queue<E> {
 	 * Retorna o elemento posicionado no inicio da fila.
 	 */
 	@Override
-	public E head() {
-		if (isEmpty()) {
+	public E head() throws ADTUnderflowException{
+		if (isEmpty()){ 
 			 throw new ADTUnderflowException();
 		}
 		return array[tamanhoAtual];
