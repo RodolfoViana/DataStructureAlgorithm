@@ -24,7 +24,8 @@ public interface Stack<E> {
 	 * Returns the top element of a stack without removing it. If the stack 
 	 * is empty top() returns a specific exception. 
 	 */
-	public E top();
+	public E top() throws ADTUnderflowException;
+
 	
 	/**
 	 * Returns the how much elements are in the structure.  
