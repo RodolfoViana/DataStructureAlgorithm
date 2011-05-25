@@ -2,10 +2,11 @@ package eda.linearADT;
 
 import eda.util.ADTNoSuchElement;
 import eda.util.ADTOverflowException;
+import eda.util.Constants;
 
 /**
- * Estrutura representa um alista simples implementada de forma recursiva. 
- * Ela representa um no da lista que deve er ligado a outros e todos os metodos
+ * Estrutura representa uma lista simples implementada de forma recursiva. 
+ * Ela representa um no da lista que deve ser ligado a outros e todos os metodos
  * devem ser definidos nessa classe, de forma recursiva dentro de cada no, como 
  * visto em sala de aula. 
  * A estrutura deve ter um tamanho inicial, um tamanho maximo que pode 
@@ -17,29 +18,56 @@ import eda.util.ADTOverflowException;
  * estrutura. Faca protected qualquer outro metodo auxiliar. 
  */
 public class SingleLinkedListRecursiveImpl<E> implements LinkedList<E> {
+	
+
+	private E element;
+	private LinkedList<E> next;
 
 	@Override
 	public boolean isEmpty() {
-		// TODO Auto-generated method stub
-		return false;
+		boolean resp = false;
+		
+		if (this.next == null){
+			resp = true;
+		}
+		
+		return resp;
 	}
 
 	@Override
 	public boolean full() {
-		// TODO Auto-generated method stub
-		return false;
+		boolean resp = false;
+		
+		if (size() >= eda.util.Constants.MAX_SIZE_OF_STRUCTURE ){
+			resp = true;
+		}
+		return resp;
 	}
 
 	@Override
 	public int size() {
-		// TODO Auto-generated method stub
-		return 0;
+		int size = 0;
+		
+		if (this.next != null){
+			size = 1 + next.size();
+		}
+		return size;
 	}
 
 	@Override
 	public void insert(E element) throws ADTOverflowException {
-		// TODO Auto-generated method stub
-
+		if (!full()){
+			if (this.next == null ){
+				this.element = element;
+				this.next = null;
+			} else {
+				this.next.insert(element);
+			}
+		}
+		else {
+			//como lanca erro ! 
+		}
+		
 	}
 
 	@Override
@@ -77,5 +105,141 @@ public class SingleLinkedListRecursiveImpl<E> implements LinkedList<E> {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+//	private int dado = -1;
+//	private ListaInteirosImpl proximo;
+//	
+//	
+//	@Override
+//	public boolean isEmpty(){
+//		boolean resp = false;
+//		
+//		if (this.proximo == null){
+//			resp = true;
+//		}
+//		return resp;
+//	}
+//	
+//	@Override
+//	public int tamanho() {
+//		int size = 0;
+//		
+//		if (this.proximo != null){
+//			size = 1 + proximo.tamanho();
+//		}
+//		return size;
+//	}
+//
+//	@Override
+//	public void inserir(int numero) {
+//		
+//		if (this.proximo == null ){
+//			this.dado = numero;
+//			this.proximo = new ListaInteirosImpl();
+//		} else {
+//			proximo.inserir(numero);
+//		}
+//	}
+//
+//	@Override
+//	public int procurar(int numero) {
+//		int retorno = -1;
+//		
+//		if (this.proximo == null){
+//			throw new RuntimeException(MSG_INEXISTENTE);
+//		}
+//		 
+//		else{
+//			if (this.dado == numero){
+//				retorno = this.dado;
+//			} else {
+//				retorno = proximo.procurar(numero);
+//			}
+//			
+//		}
+//		return retorno;
+//	}
+//
+//	@Override
+//	public void remover(int numero) {
+//		if (!isEmpty()){
+//			if (this.dado == numero){
+//				this.dado = proximo.dado;
+//				this.proximo = proximo.proximo;
+//			}
+//			else {
+//				proximo.remover(numero);
+//			}
+//		}
+//	}
+//	
+//	
+//	@Override
+//	public ListaInteiros revert() {
+//		ListaInteiros resp = new ListaInteirosImpl();
+//		
+//		if (!isEmpty()){
+//			resp = proximo.revert();
+//			resp.inserir(this.dado);
+//		}
+//	
+//		return resp;
+//	}
+//
+//	@Override
+//	public int maior() {
+//		int resp = Integer.MIN_VALUE;
+//		
+//		if (!isEmpty())
+//			if (this.dado > resp){
+//				int maiorResto = proximo.maior();
+//				if (maiorResto > this.dado){
+//					resp = maiorResto;
+//				} else {
+//					resp = dado;
+//				}
+//			}
+//			else {
+//				resp = proximo.maior();
+//			}
+//		return resp;
+//	}
+//
+//	@Override
+//	public int menor() {
+//		int resp = Integer.MAX_VALUE;
+//		
+//		if (!isEmpty())
+//			if (this.dado < resp){
+//				int maiorResto = proximo.maior();
+//				if (maiorResto < this.dado){
+//					resp = maiorResto;
+//				} else {
+//					resp = dado;
+//				}
+//			}
+//			else {
+//				resp = proximo.maior();
+//			}
+//		return resp;
+//	}
+//
+//	public int getDado() {
+//		return dado;
+//	}
+//
+//	public void setDado(int dado) {
+//		this.dado = dado;
+//	}
+//
+//	public ListaInteirosImpl getProximo() {
+//		return proximo;
+//	}
+//
+//	public void setProximo(ListaInteirosImpl proximo) {
+//		this.proximo = proximo;
+//	}
+//
+//}
 
 }
