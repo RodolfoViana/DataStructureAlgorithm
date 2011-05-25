@@ -35,6 +35,9 @@ public class QueueImpl<E> implements Queue<E> {
 		array = new int[Constants.INITIAL_SIZE_OF_STRUCTURE];
 	}
 	
+	/**
+	 * Metodo que enfileira elementos na fila.
+	 */
 	@Override
 	public void enqueue(E element) throws ADTOverflowException{
 		if(full()){
