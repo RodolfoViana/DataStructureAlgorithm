@@ -29,10 +29,16 @@ import eda.util.Constants;
 public class QueueImpl<E> implements Queue<E> {
 
 	private int index;
-	private int[] array;
+	private int tamanhoInicial;
+	private int tamanhoAtual;
+	private int tamanhoMaximo;
+	private E[] array;
+	private final int FACTOR = Constants.INCREASING_FACTOR;
 
 	public QueueImpl(){
-		array = new int[Constants.INITIAL_SIZE_OF_STRUCTURE];
+		tamanhoInicial = Constants.INITIAL_SIZE_OF_STRUCTURE;
+		tamanhoMaximo = Constants.MAX_SIZE_OF_STRUCTURE;
+		array = (E[]) new Object[tamanhoInicial];
 	}
 	
 	/**
@@ -43,15 +49,18 @@ public class QueueImpl<E> implements Queue<E> {
 		if(full()){
 			throw new ADTOverflowException();
 		}
-
+		array[++index] = element;
 	}
 
 	@Override
 	public E dequeue() throws ADTUnderflowException{
+		E result;
 		if(isEmpty()){
 			throw new ADTUnderflowException();
 		}
-		return null;
+		result = array[0];
+		shiftLeft();
+		return result;
 	}
 
 	/**
@@ -60,9 +69,9 @@ public class QueueImpl<E> implements Queue<E> {
 	@Override
 	public E head() {
 		if(isEmpty()){
-//			throw new ADTUnderflowException();
+	//		throw new ADTUnderflowException();
 		}
-		return null;
+		return array[tamanhoAtual];
 	}
 
 	/**
@@ -78,7 +87,7 @@ public class QueueImpl<E> implements Queue<E> {
 	 */
 	@Override
 	public boolean isEmpty() {
-		return index == -1;
+		return array.length == 0;
 	}
 
 	/**
@@ -86,12 +95,19 @@ public class QueueImpl<E> implements Queue<E> {
 	 */
 	@Override
 	public boolean full() {
-		return index + 1 == array.length;
+		return array.length == tamanhoMaximo;
 	}
 
+	/**
+	 * Retorna o array contendo os elementos que estao na fila.
+	 */
 	@Override
 	public E[] toArray(){
+		return array;
+	}
+	
+	protected void shiftLeft() {
 		// TODO Auto-generated method stub
-		return null;
+		
 	}
 }
