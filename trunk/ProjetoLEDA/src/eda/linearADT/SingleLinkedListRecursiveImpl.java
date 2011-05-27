@@ -72,12 +72,12 @@ public class SingleLinkedListRecursiveImpl<E> implements LinkedList<E> {
 
 	@Override
 	public int search(E element) throws ADTNoSuchElement {
-        int resp = -1;
+        E resp = null;
          
         if (this.next == null){
             //lancar
         } else {
-            if (this.dado == element){
+            if (this.element == element){
                 resp = this.element;
             } else {
                 resp = this.next.search(element); 
