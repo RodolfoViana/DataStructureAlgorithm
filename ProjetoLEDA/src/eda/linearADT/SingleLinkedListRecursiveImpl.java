@@ -2,11 +2,28 @@ package eda.linearADT;
 
 import eda.util.ADTNoSuchElement;
 import eda.util.ADTOverflowException;
+import eda.util.ADTUnderflowException;
 import eda.util.Constants;
 
+
 /**
- * Estrutura representa uma lista simples implementada de forma recursiva. 
- * Ela representa um no da lista que deve ser ligado a outros e todos os metodos
+ * Universidade Federal de Campina Grande
+ * Projetos de Laboratorio de Estrutura de Dados
+ * 
+ * Equipe: Renan Pinto
+ *         Layse Sobreira
+ *         Rodolfo Viana
+ *         Talita Lobo
+ * 
+ *      Implementacao das Estruturas Lineares
+ *              Lista Dupla, Lista Simples, Fila e Pilha
+ *                      Pilha - Implementacao de Uma Pilha com duas Filas
+ */
+
+
+/**
+ * Estrutura representa um alista simples implementada de forma recursiva. 
+ * Ela representa um no da lista que deve er ligado a outros e todos os metodos
  * devem ser definidos nessa classe, de forma recursiva dentro de cada no, como 
  * visto em sala de aula. 
  * A estrutura deve ter um tamanho inicial, um tamanho maximo que pode 
@@ -17,24 +34,39 @@ import eda.util.Constants;
  * definidas em eda.util.Constantes para inicializar os valores internos de sua 
  * estrutura. Faca protected qualquer outro metodo auxiliar. 
  */
-public class SingleLinkedListRecursiveImpl<E> implements LinkedList<E> {
+public class SingleLinkedListRecursiveImpl<E extends Comparable<E>> implements LinkedList<E> {
 	
-
 	private E element;
-	private LinkedList<E> next;
-
-	@Override
-	public boolean isEmpty() {
-		boolean resp = false;
-		
-		if (this.next == null){
-			resp = true;
-		}
-		
-		return resp;
-	}
-
-	@Override
+	@SuppressWarnings("rawtypes")
+	private SingleLinkedListNode head;
+    @SuppressWarnings("rawtypes")
+	private SingleLinkedListNode next;
+    private int size = 0;
+    private E[] array;
+    
+    public SingleLinkedListRecursiveImpl() {
+    	array = (E[]) new Object[eda.util.Constants.INITIAL_SIZE_OF_STRUCTURE];
+    	head=null;
+    	next=head;
+    }
+    
+    /**
+     * @return True caso a lista esteja vazia, false caso contrario
+     */
+    @Override
+    public boolean isEmpty() {
+        boolean resp = false;
+         
+        if (this.next == null){
+            resp = true;
+        }
+        return resp;
+    }
+    
+    /**
+     * @return True caso a pilha esteja cheia, false caso contrario
+     */
+    @Override
 	public boolean full() {
 		boolean resp = false;
 		
@@ -43,69 +75,87 @@ public class SingleLinkedListRecursiveImpl<E> implements LinkedList<E> {
 		}
 		return resp;
 	}
-
+    
+    /**
+     * @return O numero de elementos da lista
+     */
 	@Override
-	public int size() {
-		int size = 0;
-		
-		if (this.next != null){
-			size = 1 + next.size();
-		}
+    public int size() {
 		return size;
-	}
-
+    }
+	
+	/**
+	 * Insere um elemento na lista
+	 */
 	@Override
 	public void insert(E element) throws ADTOverflowException {
-		if (!full()){
-			if (this.next == null ){
-				this.element = element;
-				this.next = null;
-			} else {
-				this.next.insert(element);
-			}
-		}
-		else {
-			//como lanca erro ! 
-		}
-		
+		if (!full()) {
+			this.next = new SingleLinkedListNode<E>(null, element);
+			this.next=this.next.getNext();
+			size++;
+		}		
 	}
-
+	
+	/**
+	 * Pesuisa um elemento na lista
+	 */
+	@SuppressWarnings("unchecked")
 	@Override
-	public int search(E element) throws ADTNoSuchElement {
-        E resp = null;
-         
-        if (this.next == null){
-            //lancar
-        } else {
-            if (this.element == element){
-                resp = this.element;
-            } else {
-                resp = this.next.search(element); 
-            }
-             
-        }
-         
-        return resp;
-    } 
-
+    public int search(E element) throws ADTNoSuchElement {
+		 int resp = -1;
+		 
+		 if(isEmpty()){
+			 throw new ADTNoSuchElement();
+		 } else {
+			 if(this.element == element){
+				 resp = (Integer) element;
+			} else {
+				resp = ((LinkedList<E>) this.next).search(element);
+			}
+		 }
+		 return resp;
+    }
+	
+	
+	/**
+	 * Remove um elemento na lista
+	 */
 	@Override
 	public void remove(E element) {
-		// TODO Auto-generated method stub
-
+		/* vou ajeitar os erros
+		 * 
+		 if (!isEmpty()){
+			 if(this.element == element){
+				 this.element = (E)((SingleLinkedListNode) next).getElement();
+				 this.next = ((SingleLinkedListNode) this.getNext()).getNext();
+			 } else {
+				 ((LinkedList<E>) this.next).remove(element);
+			}
+		}*/
 	}
-
+	
+	
+	/**
+	 * 
+	 */
 	@Override
 	public LinkedList<E> revert() {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
+	
+	/**
+	 *  Metodo que retorna o maior valor de uma lista
+	 */
 	@Override
 	public int maximum() {
 		// TODO Auto-generated method stub
 		return 0;
 	}
-
+	
+	/**
+	 *  Metodo que retorna o menor valor de uma lista
+	 */
 	@Override
 	public int minimum() {
 		// TODO Auto-generated method stub
@@ -113,145 +163,30 @@ public class SingleLinkedListRecursiveImpl<E> implements LinkedList<E> {
 	}
 	
 	@Override
-	public E[] toArray(){
-		// TODO Auto-generated method stub
-		return null;
+	public E[] toArray(){	
+		SingleLinkedListNode elemento = head;
+		for (int i = 0; i < size(); i++) {
+			array[i] = (E) elemento.getValue();
+			elemento = elemento.getNext();
+		}
+		return array;
 	}
 	
-//	private int dado = -1;
-//	private ListaInteirosImpl proximo;
-//	
-//	
-//	@Override
-//	public boolean isEmpty(){
-//		boolean resp = false;
-//		
-//		if (this.proximo == null){
-//			resp = true;
-//		}
-//		return resp;
-//	}
-//	
-//	@Override
-//	public int tamanho() {
-//		int size = 0;
-//		
-//		if (this.proximo != null){
-//			size = 1 + proximo.tamanho();
-//		}
-//		return size;
-//	}
-//
-//	@Override
-//	public void inserir(int numero) {
-//		
-//		if (this.proximo == null ){
-//			this.dado = numero;
-//			this.proximo = new ListaInteirosImpl();
-//		} else {
-//			proximo.inserir(numero);
-//		}
-//	}
-//
-//	@Override
-//	public int procurar(int numero) {
-//		int retorno = -1;
-//		
-//		if (this.proximo == null){
-//			throw new RuntimeException(MSG_INEXISTENTE);
-//		}
-//		 
-//		else{
-//			if (this.dado == numero){
-//				retorno = this.dado;
-//			} else {
-//				retorno = proximo.procurar(numero);
-//			}
-//			
-//		}
-//		return retorno;
-//	}
-//
-//	@Override
-//	public void remover(int numero) {
-//		if (!isEmpty()){
-//			if (this.dado == numero){
-//				this.dado = proximo.dado;
-//				this.proximo = proximo.proximo;
-//			}
-//			else {
-//				proximo.remover(numero);
-//			}
-//		}
-//	}
-//	
-//	
-//	@Override
-//	public ListaInteiros revert() {
-//		ListaInteiros resp = new ListaInteirosImpl();
-//		
-//		if (!isEmpty()){
-//			resp = proximo.revert();
-//			resp.inserir(this.dado);
-//		}
-//	
-//		return resp;
-//	}
-//
-//	@Override
-//	public int maior() {
-//		int resp = Integer.MIN_VALUE;
-//		
-//		if (!isEmpty())
-//			if (this.dado > resp){
-//				int maiorResto = proximo.maior();
-//				if (maiorResto > this.dado){
-//					resp = maiorResto;
-//				} else {
-//					resp = dado;
-//				}
-//			}
-//			else {
-//				resp = proximo.maior();
-//			}
-//		return resp;
-//	}
-//
-//	@Override
-//	public int menor() {
-//		int resp = Integer.MAX_VALUE;
-//		
-//		if (!isEmpty())
-//			if (this.dado < resp){
-//				int maiorResto = proximo.maior();
-//				if (maiorResto < this.dado){
-//					resp = maiorResto;
-//				} else {
-//					resp = dado;
-//				}
-//			}
-//			else {
-//				resp = proximo.maior();
-//			}
-//		return resp;
-//	}
-//
-//	public int getDado() {
-//		return dado;
-//	}
-//
-//	public void setDado(int dado) {
-//		this.dado = dado;
-//	}
-//
-//	public ListaInteirosImpl getProximo() {
-//		return proximo;
-//	}
-//
-//	public void setProximo(ListaInteirosImpl proximo) {
-//		this.proximo = proximo;
-//	}
-//
-//}
+	
+	//metodos auxiliares
+	
+	/**
+	 * @return element
+	 */
+	public E getElement(){
+		return element;
+	}
+	
+	/**
+	 * @param element
+	 */
+	public void setElement(E element){
+		this.element = element;
+	}
 
 }

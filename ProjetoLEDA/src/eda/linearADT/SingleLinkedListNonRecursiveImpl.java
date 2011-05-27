@@ -7,11 +7,33 @@ import eda.util.ADTOverflowException;
  * The node of a non recursive linked list. This class is recursive.
  * Fill the class.
  */
-class SingleLinkedListNode{
+class SingleLinkedListNode<E>{
+	
+	private SingleLinkedListNode next;
+	private E value;
+	
+	public SingleLinkedListNode(SingleLinkedListNode next, E value) {
+		this.next=next;
+		this.value=value;
+	}
+	
 	public boolean isEmpty() {
 		// TODO Auto-generated method stub
 		return false;
 	}
+	
+	public SingleLinkedListNode getNext() {
+		return next;
+	}
+	
+	public E getValue() {
+		return value;
+	}
+	
+	public void setNext(SingleLinkedListNode next) {
+		this.next = next;
+	}
+	
 }
 
 /**
@@ -28,23 +50,42 @@ class SingleLinkedListNode{
  * estrutura. Faca protected qualquer outro metodo auxiliar.
  */
 public class SingleLinkedListNonRecursiveImpl<E> implements LinkedList<E> {
-
+	
+	private SingleLinkedListNode next;
+	private int size = 0;
+	
+	/**
+     * @return True caso a lista esteja vazia, false caso contrario
+     */
 	@Override
 	public boolean isEmpty() {
-		// TODO Auto-generated method stub
-		return false;
+		boolean resp = false;
+        
+        if (this.next == null){
+            resp = true;
+        }
+        return resp;
 	}
 
-	@Override
+	/**
+     * @return True caso a pilha esteja cheia, false caso contrario
+     */
+    @Override
 	public boolean full() {
-		// TODO Auto-generated method stub
-		return false;
+		boolean resp = false;
+		
+		if (size() >= eda.util.Constants.MAX_SIZE_OF_STRUCTURE ){
+			resp = true;
+		}
+		return resp;
 	}
-
+    
+    /**
+     * @return O numero de elementos da lista
+     */
 	@Override
 	public int size() {
-		// TODO Auto-generated method stub
-		return 0;
+		return size;
 	}
 
 	@Override
