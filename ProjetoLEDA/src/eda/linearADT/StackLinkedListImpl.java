@@ -4,6 +4,21 @@ import eda.util.ADTOverflowException;
 import eda.util.ADTUnderflowException;
 
 /**
+ * Universidade Federal de Campina Grande
+ * Projetos de Laboratorio de Estrutura de Dados
+ * 
+ * Equipe:  Layse Sobreira
+ * 			Renan Pinto
+ * 			Rodolfo Viana
+ * 			Talita Lobo
+ * 
+ * 	Implementacao das Estruturas Lineares
+ * 		Lista Dupla, Lista Simples, Fila e Pilha
+ * 			Pilha - Implementacao Recursiva
+ */
+
+/**
+ * IMPLEMENTACAO RECURSIVA
  * Estrutura que guarda elementos seguindo a politica FIFO, mas que utiliza
  * UMA SingleLinkedListRecursiveImpl internamente para guardar os dados. 
  * A estrutura deve ter um tamanho inicial, um tamanho maximo que pode crescer e um FATOR 
