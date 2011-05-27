@@ -19,46 +19,100 @@ import eda.util.ADTUnderflowException;
  */
 public class DoubleLinkedListRecursiveImpl<E> implements DoubleLinkedList<E> {
 
+	private E element;
+	private DoubleLinkedList<E> next;
+	private DoubleLinkedList<E> before;	
+	
 	@Override
 	public boolean isEmpty() {
-		// TODO Auto-generated method stub
-		return false;
+		boolean resp = false;
+		resp = this.getNext() == null;
+		return resp;
 	}
 
 	@Override
 	public boolean full() {
-		// TODO Auto-generated method stub
-		return false;
+		
+		boolean resp = false;
+		
+		if (size() >= eda.util.Constants.MAX_SIZE_OF_STRUCTURE ){
+			resp = true;
+		}
+		return resp;
 	}
 
 	@Override
 	public int size() {
-		// TODO Auto-generated method stub
-		return 0;
+		int size = 0;
+		if(this.getNext() != null){ 
+			size = 1 + this.getNext().size();
+		}
+		return size;
 	}
 
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	public void insert(E element) throws ADTOverflowException {
-		// TODO Auto-generated method stub
+		if (this.isEmpty()) {
+			this.setElement(element);
+			this.setNext(new DoubleLinkedListRecursiveImpl());
+			((DoubleLinkedListRecursiveImpl) getNext()).setBefore(this);
+		} else {
 
+			if (this.full()) {
+				throw new ADTOverflowException();
+			} else {
+				((DoubleLinkedListRecursiveImpl) this.getNext()).insert(element);
+			}
+		}
 	}
 
 	@Override
 	public int search(E element) throws ADTNoSuchElement {
-		// TODO Auto-generated method stub
-		return 0;
+		int retorno = -1;
+		
+		if(isEmpty()){
+			throw new ADTNoSuchElement();
+		}else{
+			if(this.element == element){
+				retorno = (Integer) element;
+			}else{
+				retorno = this.next.search(element);
+			}
+		}
+		return retorno;
 	}
 
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override
 	public void remove(E element) {
-		// TODO Auto-generated method stub
-
+		
+		if (!isEmpty()){
+			if(this.element == element){
+				this.element = (E)((DoubleLinkedListRecursiveImpl) next).getElement();
+				this.next = ((DoubleLinkedListRecursiveImpl) this.getNext()).getNext();
+			}else{
+				this.next.remove(element);
+			}
+		}
 	}
 
 	@Override
 	public LinkedList<E> revert() {
-		// TODO Auto-generated method stub
-		return null;
+		DoubleLinkedListRecursiveImpl<E> resp = new DoubleLinkedListRecursiveImpl<E>();
+		
+		if (!isEmpty()){
+			resp = (DoubleLinkedListRecursiveImpl<E>) getNext().revert();
+			
+			//TODO se eu mudar a assinatura do metodo nao precisa desse try, mas nao sei se a gente pode fazer isso 
+			try {
+				resp.insert(getElement());
+			} catch (ADTOverflowException e) {
+				e.printStackTrace();
+			}
+		}
+	
+		return resp;
 	}
 
 	@Override
@@ -75,38 +129,110 @@ public class DoubleLinkedListRecursiveImpl<E> implements DoubleLinkedList<E> {
 
 	@Override
 	public boolean isHead() {
-		// TODO Auto-generated method stub
-		return false;
+		
+		boolean resp = false;
+		resp = this.getBefore() == null && this.getNext() != null;
+		return resp;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public DoubleLinkedList<E> addFirst(int numero) throws ADTOverflowException {
-		// TODO Auto-generated method stub
-		return null;
+
+		if (this.full()) {
+			throw new ADTOverflowException();
+		} else {
+
+			@SuppressWarnings("rawtypes")
+			DoubleLinkedListRecursiveImpl newHead = new DoubleLinkedListRecursiveImpl();
+
+			newHead.setElement(numero);
+			newHead.setNext(this);
+			this.setBefore(newHead);
+
+			return newHead;
+		}
+
 	}
 
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	public void addLast(int numero) throws ADTOverflowException {
-		// TODO Auto-generated method stub
+		if (this.isEmpty()) {
 
+			// TODO nao sei fazer de forma diferente, mas acho que ta errado
+			// dessa forma que fiz
+			Object newNumero = (Object) numero;
+
+			this.setElement((E) newNumero);
+			this.setNext(new DoubleLinkedListRecursiveImpl());
+			((DoubleLinkedListRecursiveImpl) getNext()).setBefore(this);
+		} else {
+
+			if (this.full()) {
+				throw new ADTOverflowException();
+			} else {
+				((DoubleLinkedListRecursiveImpl) this.getNext()).addLast(numero);
+			}
+		}		
 	}
 
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override
 	public void removeFirst() throws ADTUnderflowException {
-		// TODO Auto-generated method stub
-
+		
+		if (!isEmpty()){
+			if (isHead()){
+				this.element = (E)((DoubleLinkedListRecursiveImpl) next).getElement();
+				this.next = ((DoubleLinkedListRecursiveImpl) this.getNext()).getNext();		
+			}
+			
+		} else {
+			throw new ADTUnderflowException();
+		}
 	}
 
 	@Override
 	public void removeLast() throws ADTUnderflowException {
-		// TODO Auto-generated method stub
-
+		
+		if (isEmpty()){
+			throw new ADTUnderflowException();
+		}
+		if (getNext().isEmpty()){
+			remove(getElement());
+		}else {
+			getNext().removeLast();
+		}
 	}
 	
 	@Override
 	public E[] toArray(){
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	public E getElement() {
+		return element;
+	}
+
+	public void setElement(E element) {
+		this.element = element;
+	}
+
+	public DoubleLinkedList<E> getNext() {
+		return next;
+	}
+
+	public void setNext(DoubleLinkedList<E> next) {
+		this.next = next;
+	}
+
+	public DoubleLinkedList<E> getBefore() {
+		return before;
+	}
+
+	public void setBefore(DoubleLinkedList<E> before) {
+		this.before = before;
 	}
 
 }

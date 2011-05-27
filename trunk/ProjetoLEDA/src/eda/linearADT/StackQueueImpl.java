@@ -44,7 +44,9 @@ public class StackQueueImpl<E> implements Stack<E> {
 	private int tamanhoMaximo;
 	private final int FATOR = Constants.INCREASING_FACTOR;
 	
-	
+	/**
+	 * Construtor de uma pilha usando duas filas.
+	 */
 	@SuppressWarnings({ "unchecked", "unchecked", "rawtypes" })
 	public StackQueueImpl() {
 		tamanhoMaximo = Constants.MAX_SIZE_OF_STRUCTURE;
@@ -53,7 +55,9 @@ public class StackQueueImpl<E> implements Stack<E> {
 		queue2 = (Queue) new Object();
 	}
 	
-	
+	/**
+	 * Insere um elemento na pilha, usando duas filas.
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public void push(E element) throws ADTOverflowException {
@@ -65,47 +69,71 @@ public class StackQueueImpl<E> implements Stack<E> {
 		} else {
 			queue.enqueue(element);
 		}
+		
 	}
 
-	
+	/**
+	 * Remove um elemento na pilha.
+	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public E pop() throws ADTUnderflowException {
-		
-		// 
-		Object[] a = new Object[tamanhoMaximo];
-		queue.toArray();
-		
-		
-		return null;
+		E delete = null;
+		if(isEmpty()){
+			throw new ADTUnderflowException();
+		} else {
+			if(!queue.isEmpty()){
+				delete = (E) queue.dequeue();
+			}else if (!queue2.isEmpty()){
+				delete = (E) queue2.dequeue();
+			}
+		} return delete;
+
 	}
 
+	/**
+	 * Retorna o elemento que se encontra no topo da pilha.
+	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public E top() throws ADTUnderflowException{
+		E element;
 		if (queue.isEmpty()) {
 			throw new ADTUnderflowException();
 		} else { 
-			
-			
-			return null;	
+			element = (E) queue.head();			
 		}
+		return element;	
 	}
 
+	/**
+	 * Verifica se a pilha esta vazia.
+	 */
 	@Override
 	public boolean isEmpty() {
 		return queue.isEmpty() && queue2.isEmpty();
 	}
 
+	/**
+	 * Verifica se a pilha esta cheia.
+	 */
 	@Override
 	public boolean full() {
 		return queue.full() || queue2.full();
 	}
 	
+	/**
+	 * Exibe a pilha.
+	 */
 	@Override
 	public E[] toArray(){
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	/**
+	 * Retorna o tamanho da pilha.
+	 */
 	@Override
 	public int size() {
 		int q1 = queue.size();
