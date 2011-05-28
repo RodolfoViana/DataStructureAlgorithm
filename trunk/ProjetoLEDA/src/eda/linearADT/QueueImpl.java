@@ -1,5 +1,9 @@
 package eda.linearADT;
 
+import eda.util.ADTOverflowException;
+import eda.util.ADTUnderflowException;
+import eda.util.Constants;
+
 /**
  * Universidade Federal de Campina Grande
  * Projetos de Laboratorio de Estrutura de Dados
@@ -8,12 +12,14 @@ package eda.linearADT;
  * 			Renan Pinto
  * 			Rodolfo Viana
  * 			Talita Lobo
- *  
+
+ * 
+ * 	Implementacao das Estruturas Lineares
+ * 		Lista Dupla, Lista Simples, Fila e Pilha
  *          Implementacao da Classe Fila
  */
-import eda.util.ADTOverflowException;
-import eda.util.ADTUnderflowException;
-import eda.util.Constants;
+
+
 
 /**
  * Fila que guarda elementos seguindo a politica FIFO. Implementar com array
@@ -83,15 +89,30 @@ public class QueueImpl<E> implements Queue<E> {
 		if (isEmpty()){ 
 			 throw new ADTUnderflowException();
 		}
-		return array[tamanhoAtual];
+		return array[0];
 	}
+	
+	/**
+	 * 
+	 * @return a quantidade de espacos alocados no array
+	 */
+	protected int counter() {
+		int counter = 0;
+		for (int i = 0; i <= array.length - 1; i++) {
+			if (array[i] != null) {
+				counter++;
+			}
+		}
+		return counter;
+	}
+	
 
 	/**
 	 * Retorna o numero de elementos presentes da fila.
 	 */
 	@Override
 	public int size() {
-		return array.length;
+		return counter();
 	}
 
 	/**
@@ -99,7 +120,7 @@ public class QueueImpl<E> implements Queue<E> {
 	 */
 	@Override
 	public boolean isEmpty() {
-		return array.length == 0;
+		return counter() == 0;
 	}
 
 	/**
@@ -107,7 +128,7 @@ public class QueueImpl<E> implements Queue<E> {
 	 */
 	@Override
 	public boolean full() {
-		return array.length == tamanhoMaximo;
+		return counter() == tamanhoMaximo;
 	}
 
 	/**
@@ -152,4 +173,16 @@ public class QueueImpl<E> implements Queue<E> {
 		}
 	}
 
+	public String toString() {
+		if (isEmpty()) 
+			return "[]";
+		
+		String impressao = "[";
+		for (int i = 0; i <= array.length - 1; i++) {
+			if (array[i] != null)
+				impressao += array[i] + ", ";
+
+		}
+		return impressao.substring(0, impressao.length() - 2) + "]";
+	}
 }
