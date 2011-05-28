@@ -4,7 +4,7 @@ import eda.util.ADTOverflowException;
 import eda.util.ADTUnderflowException;
 
 /**
- * Interface of a Queue. 
+ * Interface of a Queue
  */
 public interface Queue<E> {
 	/**
