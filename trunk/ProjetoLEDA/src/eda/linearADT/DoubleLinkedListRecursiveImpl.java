@@ -104,7 +104,7 @@ public class DoubleLinkedListRecursiveImpl<E> implements DoubleLinkedList<E> {
 		if (!isEmpty()){
 			resp = (DoubleLinkedListRecursiveImpl<E>) getNext().revert();
 			
-			//TODO se eu mudar a assinatura do metodo nao precisa desse try, mas nao sei se a gente pode fazer isso 
+			// se eu mudar a assinatura do metodo nao precisa desse try, mas nao sei se a gente pode fazer isso 
 			try {
 				resp.insert(getElement());
 			} catch (ADTOverflowException e) {
@@ -160,7 +160,7 @@ public class DoubleLinkedListRecursiveImpl<E> implements DoubleLinkedList<E> {
 	public void addLast(int numero) throws ADTOverflowException {
 		if (this.isEmpty()) {
 
-			// TODO nao sei fazer de forma diferente, mas acho que ta errado
+			// nao sei fazer de forma diferente, mas acho que ta errado
 			// dessa forma que fiz
 			Object newNumero = (Object) numero;
 
@@ -207,7 +207,7 @@ public class DoubleLinkedListRecursiveImpl<E> implements DoubleLinkedList<E> {
 	
 	@Override
 	public E[] toArray(){
-		// TODO Auto-generated method stub
+		// Auto-generated method stub
 		return null;
 	}
 
