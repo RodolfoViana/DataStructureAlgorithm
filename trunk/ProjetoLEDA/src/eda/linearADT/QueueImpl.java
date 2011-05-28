@@ -77,12 +77,15 @@ public class QueueImpl<E> implements Queue<E> {
 	 */
 	@Override
 	public E dequeue() throws ADTUnderflowException {
+		@SuppressWarnings("unchecked")
 		E elementoRemovido = (E) new Object();
+		// se a fila estiver vazia 
 		if (isEmpty()) {
 			throw new ADTUnderflowException();
 		} else {
+			// caso contrario, encontra o elemento a ser removido e faz o shift left
 			elementoRemovido = array[0];
-			array[0] = null;
+			array[1] = null;
 			shiftLeft();
 		}
 		return elementoRemovido;
@@ -96,7 +99,7 @@ public class QueueImpl<E> implements Queue<E> {
 		if (isEmpty()){ 
 			 throw new ADTUnderflowException();
 		}
-		return array[0];
+		return array[1];
 	}
 	
 	/**
@@ -147,10 +150,10 @@ public class QueueImpl<E> implements Queue<E> {
 	}
 
 	/**
-	 * Metodo que desloca um elemento na fila.
+	 * Metodo que desloca para a fila para a esquerda em um elemento
 	 */
 	protected void shiftLeft() {
-		for (int i = 0; i <= index; i++) {
+		for (int i = 0; i <= counter(); i++) {
 			array[i] = array[i + 1];
 		}
 		index--;
@@ -165,10 +168,8 @@ public class QueueImpl<E> implements Queue<E> {
 		// TAMANHO MAXIMO = 100 TAMANHO INICIAL = 30 FATOR = 20
 		// se o numero de espacos alocados no array foi igual ao seu proprio tamanho, aumenta
 		
-		
 			E[] array2 = (E[]) new Object[array.length];
-			
-			
+				
 			// joga os elementos do array menor pro maior
 			for (int i = 0; i <= array.length; i++) {
 				array2[i] = array[i];
