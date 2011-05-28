@@ -48,6 +48,7 @@ public class StackImpl<E> implements Stack<E> {
 		tamanhoInicial = Constants.INITIAL_SIZE_OF_STRUCTURE;
 		tamanhoMaximo = Constants.MAX_SIZE_OF_STRUCTURE;
 		array = (E[]) new Object[tamanhoInicial];
+		tamanhoAtual = array.length;
 	}
 
 	/**
@@ -59,27 +60,30 @@ public class StackImpl<E> implements Stack<E> {
 	@SuppressWarnings("unchecked")
 	protected void aumentaTamanho() {
 
-		// ISSO TA ERRADO PRODUCAO
+		// TAMANHO MAXIMO = 100 TAMANHO INICIAL = 30 FATOR = 20
+		// se o numero de espacos alocados no array foi igual ao seu proprio tamanho, aumenta
 		
-		if ((counter() < tamanhoMaximo)) {
-			this.tamanhoAtual = (tamanhoAtual + FATOR);
-
-			// cria um novo array com o tamanho maior
-			E[] array2 = (E[]) new Object[tamanhoAtual];
-
-			// transfere os dados do array antigo pro array novo
+		
+			E[] array2 = (E[]) new Object[array.length];
+			
+			
+			// joga os elementos do array menor pro maior
 			for (int i = 0; i <= array.length; i++) {
 				array2[i] = array[i];
 			}
-
-			// instancia novamente
-			array = (E[]) new Object[tamanhoAtual];
-
-			// migra os dados
+			
+			// refaz o array menor com o tamanho novo  (tamanho antigo + fator)
+			// se o numero de alocacoes for 90, so pode por mais 10
+			if (counter() == 90) {
+				array = (E[]) new Object[array.length + 10];
+			} else {
+				array = (E[]) new Object[array.length + FATOR];
+			}
+			
+			// joga os elementos do array2 pro array 1
 			for (int i = 0; i < array2.length; i++) {
 				array[i] = array2[i];
 			}
-		}
 	}
 
 	/**
@@ -102,11 +106,11 @@ public class StackImpl<E> implements Stack<E> {
 	 */
 	@Override
 	public void push(E element) throws ADTOverflowException {
-		int c = counter();
+	
 		// tamanho inicial, tamanho atual, tamanho maximo
 
 		if (!full()) {
-			if (c == tamanhoAtual) {
+			if (counter() == tamanhoAtual) {
 				aumentaTamanho();
 				// insere o elemento na proxima posicao vazia
 				array[counter() + 1] = element;
@@ -128,9 +132,9 @@ public class StackImpl<E> implements Stack<E> {
 		if (isEmpty()) {
 			throw new ADTUnderflowException();
 		} else {
-			elementoRemovido = array[tamanhoAtual];
-			array[tamanhoAtual] = null;
-			tamanhoAtual--;
+			// remove o ultimo elemento do array
+			elementoRemovido = array[counter()];
+			array[counter()] = null;
 		}
 		return elementoRemovido;
 	}
@@ -151,7 +155,7 @@ public class StackImpl<E> implements Stack<E> {
 	public E top() throws ADTUnderflowException {
 		if (isEmpty())
 			throw new ADTUnderflowException();
-		return array[tamanhoAtual];
+		return array[counter()];
 	}
 
 	/**
@@ -167,7 +171,7 @@ public class StackImpl<E> implements Stack<E> {
 	 */
 	@Override
 	public boolean full() {
-		return array.length == tamanhoMaximo;
+		return counter() == tamanhoMaximo;
 	}
 
 	/**
@@ -175,7 +179,7 @@ public class StackImpl<E> implements Stack<E> {
 	 */
 	@Override
 	public int size() {
-		return array.length;
+		return counter();
 	}
 
 	/**
