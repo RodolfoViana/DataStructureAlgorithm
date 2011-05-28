@@ -68,7 +68,7 @@ public class SingleLinkedListNonRecursiveImpl<E> implements LinkedList<E> {
 	}
 
 	/**
-     * @return True caso a lista esteja cheia, false caso contrario
+     * @return True caso a pilha esteja cheia, false caso contrario
      */
     @Override
 	public boolean full() {
