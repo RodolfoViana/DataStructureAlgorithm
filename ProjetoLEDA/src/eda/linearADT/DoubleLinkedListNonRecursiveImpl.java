@@ -1,6 +1,5 @@
 package eda.linearADT;
 
-
 import eda.util.ADTNoSuchElement;
 import eda.util.ADTOverflowException;
 import eda.util.ADTUnderflowException;
@@ -10,10 +9,58 @@ import eda.util.ADTUnderflowException;
  * Fill the class.
  */
 class DoubleLinkedListNode{
+	
+	private Object element;
+	private DoubleLinkedListNode before;
+	private DoubleLinkedListNode next;
+	
+	public DoubleLinkedListNode (Object element){
+		this.element = element;
+	}
+	
 	public boolean isEmpty() {
 		// TODO Auto-generated method stub
 		return false;
 	}
+
+
+
+	public Object getElement() {
+		return element;
+	}
+
+
+
+	public void setElement(Object element) {
+		this.element = element;
+	}
+
+
+
+	public DoubleLinkedListNode getBefore() {
+		return before;
+	}
+
+
+
+	public void setBefore(DoubleLinkedListNode before) {
+		this.before = before;
+	}
+
+
+
+	public DoubleLinkedListNode getNext() {
+		return next;
+	}
+
+
+
+	public void setNext(DoubleLinkedListNode next) {
+		this.next = next;
+	}
+	
+	
+	
 }
 /**
  * Estrutura representa uma lista dupla implementada de forma nao recursiva. 
@@ -31,29 +78,49 @@ class DoubleLinkedListNode{
  */
 public class DoubleLinkedListNonRecursiveImpl<E> implements DoubleLinkedList<E> {
 	
+	private DoubleLinkedListNode head;
+	private DoubleLinkedListNode tail;
+	private int size;
+	
 	
 
 	@Override
 	public boolean isEmpty() {
-		return false;
+		return size() == 0;
 	}
 
 	@Override
 	public boolean full() {
-		// TODO Auto-generated method stub
-		return false;
+		boolean resp = false;
+		
+		if (size() >= eda.util.Constants.MAX_SIZE_OF_STRUCTURE ){
+			resp = true;
+		}
+		return resp;
 	}
 
 	@Override
 	public int size() {
-		// TODO Auto-generated method stub
-		return 0;
+		return size;
 	}
 
 	@Override
 	public void insert(E element) throws ADTOverflowException {
-		// TODO Auto-generated method stub
-
+		
+		if (isEmpty()){
+			tail = head = new DoubleLinkedListNode(element);
+			size ++;
+		} else {
+			if (!full()){
+				DoubleLinkedListNode newNo = new DoubleLinkedListNode(element);
+				newNo.setBefore(tail);
+				tail.setNext(newNo);
+				tail = newNo;
+				size ++;
+			} else {
+				throw new ADTOverflowException();
+			}
+		}
 	}
 
 	/**
@@ -63,20 +130,92 @@ public class DoubleLinkedListNonRecursiveImpl<E> implements DoubleLinkedList<E> 
 	 */
 	@Override
 	public int search(E element) throws ADTNoSuchElement {
-		// TODO Auto-generated method stub
-		return 0;
+		DoubleLinkedListNode elementohead = head;
+		DoubleLinkedListNode elementoTail = tail;
+		DoubleLinkedListNode resp = null;
+		
+		for (int i = 0; i < size()/2 ; i++){
+			if (elementohead.getElement() == element){
+				resp = elementohead;
+				break;
+			} 
+			
+			if (elementoTail.getElement() == element){
+				resp = elementoTail;
+				break;
+			}
+			
+			else {
+				elementohead = elementohead.getNext();
+				elementoTail = elementoTail.getBefore();
+			}
+		} 
+		
+		if (resp == null){
+			throw new ADTNoSuchElement();
+		}
+			
+		return (Integer) resp.getElement();
 	}
 
 	@Override
 	public void remove(E element) {
-		// TODO Auto-generated method stub
-
+		DoubleLinkedListNode elementohead = head;
+		DoubleLinkedListNode elementoTail = tail;
+		boolean hasElement = false;
+		
+		if (isEmpty()){
+//			throw new ADTUnderflowException();
+		}
+		
+		if (size() == 1){
+			head = tail = new DoubleLinkedListNode(null);
+			size--;
+		}
+		else {
+						
+			for (int i = 0; i < size()/2 ; i++){
+				if (elementohead.getElement() == element){
+					hasElement = true;
+					elementohead.getBefore().setNext(elementohead.getNext());
+					elementohead.getNext().setBefore(elementohead.getBefore());
+					size--;
+					break;
+				} 				
+				if (elementoTail.getElement() == element){
+					hasElement = true;
+					elementoTail.getBefore().setNext(elementoTail.getNext());
+					elementoTail.getNext().setBefore(elementoTail.getBefore());
+					size--;
+					break;
+				}
+				else {
+					elementohead = elementohead.getNext();
+					elementoTail = elementoTail.getBefore();
+				}
+			} 
+			
+			if (hasElement == false){
+//				throw new ADTNoSuchElement();
+			}
+		}
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public LinkedList<E> revert() {
-		// TODO Auto-generated method stub
-		return null;
+		LinkedList<E> newLinked = new DoubleLinkedListNonRecursiveImpl<E>();
+		DoubleLinkedListNode newNo = tail;
+		
+		for (int i = 0; i < size(); i ++){
+			try {
+				newLinked.insert((E) newNo.getElement());
+				newNo = newNo.getBefore();
+			} catch (ADTOverflowException e) {
+				e.printStackTrace();
+			}
+		}
+		return newLinked;
 	}
 
 	@Override
@@ -99,29 +238,83 @@ public class DoubleLinkedListNonRecursiveImpl<E> implements DoubleLinkedList<E> 
 
 	@Override
 	public boolean isHead() {
-		return false;
+		return isEmpty() == false;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public DoubleLinkedList<E> addFirst(int numero) throws ADTOverflowException {
-		return null;
+		DoubleLinkedListNode newNo = null;
+		
+		if (isEmpty()){
+			tail = head = new DoubleLinkedListNode(numero);
+			size ++;
+		} else {
+			if (!full()){
+				newNo = new DoubleLinkedListNode(numero);
+				
+				newNo.setNext(head);
+				head.setBefore(newNo);
+				head = newNo;
+				size++;
+			} else {
+				throw new ADTOverflowException();
+			}
+		}
+		return (DoubleLinkedList<E>) newNo;
 	}
 
 	@Override
 	public void addLast(int numero) throws ADTOverflowException {
-		// TODO Auto-generated method stub
-
+		
+		if (isEmpty()){
+			tail = head = new DoubleLinkedListNode(numero);
+			size ++;
+		} else {
+			if (!full()){
+				DoubleLinkedListNode newNo = new DoubleLinkedListNode(numero);
+				newNo.setBefore(tail);
+				tail.setNext(newNo);
+				tail = newNo;
+				size ++;
+			} else {
+				throw new ADTOverflowException();
+			}
+		}
 	}
 
 	@Override
 	public void removeFirst() throws ADTUnderflowException {
-		// TODO Auto-generated method stub
-
+		if (isEmpty()){
+			throw new ADTUnderflowException();
+		}
+		
+		if (size() == 1){
+			head = tail = new DoubleLinkedListNode(null);
+			size--;
+		}
+		else {
+			head = head.getNext();
+			head.setBefore(null);
+			size--;
+		} 
 	}
 
 	@Override
 	public void removeLast() throws ADTUnderflowException {
-		// TODO Auto-generated method stub
+		if (isEmpty()){
+			throw new ADTUnderflowException();
+		}
+		
+		if (size() == 1){
+			head = tail = new DoubleLinkedListNode(null);
+			size--;
+		}
+		else {
+			tail = tail.getBefore();
+			tail.setNext(null);
+			size--;
+		} 
 
 	}
 
