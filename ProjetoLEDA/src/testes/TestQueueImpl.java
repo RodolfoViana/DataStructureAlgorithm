@@ -3,6 +3,8 @@ package testes;
 import eda.linearADT.QueueImpl;
 import eda.linearADT.StackImpl;
 import eda.util.ADTOverflowException;
+import eda.util.ADTUnderflowException;
+
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -37,9 +39,25 @@ public class TestQueueImpl {
 	}
 
 	@Test
-	public void testEqueue() {
+	public void testEqueue() throws ADTOverflowException, ADTUnderflowException {
+		Assert.assertTrue(q1.isEmpty());
+		Assert.assertEquals("Array deve ser vazio", q1.toString(), "[]");
 		
+		q1.enqueue("elemento1");q1.enqueue("elemento2");q1.enqueue("elemento3");
+		q1.enqueue("elemento4");q1.enqueue("elemento5");q1.enqueue("elemento6");
+		q1.enqueue("elemento7");q1.enqueue("elemento8");q1.enqueue("elemento9");
+		q1.enqueue("elemento10");
+		//System.out.println(q1.toString());
+		
+		Assert.assertEquals("Array tem 10 elementos",  "[elemento1, elemento2, elemento3, elemento4, elemento5, elemento6, elemento7, elemento8, elemento9, elemento10]", q1.toString());
 	}
+	
+	@Test
+	public void testDequeue() throws ADTUnderflowException {
+		//q1.dequeue();
+		//q1.dequeue();
+	}
+	
 	
 
 }
