@@ -19,8 +19,13 @@ class DoubleLinkedListNode{
 	}
 	
 	public boolean isEmpty() {
-		// TODO Auto-generated method stub
-		return false;
+		boolean resp = false;
+		
+		if (element == null){
+			resp = true;
+		}
+		
+		return resp;
 	}
 
 
