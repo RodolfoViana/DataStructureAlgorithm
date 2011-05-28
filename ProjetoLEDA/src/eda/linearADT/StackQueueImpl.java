@@ -43,11 +43,13 @@ public class StackQueueImpl<E> implements Stack<E> {
 	
 	private int tamanhoMaximo;
 	private final int FATOR = Constants.INCREASING_FACTOR;
+	private E element;
+	private E[] array;
 	
 	/**
 	 * Construtor de uma pilha usando duas filas.
 	 */
-	@SuppressWarnings({ "unchecked", "unchecked", "rawtypes" })
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public StackQueueImpl() {
 		tamanhoMaximo = Constants.MAX_SIZE_OF_STRUCTURE;
 		
@@ -58,7 +60,6 @@ public class StackQueueImpl<E> implements Stack<E> {
 	/**
 	 * Insere um elemento na pilha, usando duas filas.
 	 */
-	@SuppressWarnings("unchecked")
 	@Override
 	public void push(E element) throws ADTOverflowException {
 		
@@ -125,10 +126,13 @@ public class StackQueueImpl<E> implements Stack<E> {
 	/**
 	 * Exibe a pilha.
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public E[] toArray(){
-		// TODO Auto-generated method stub
-		return null;
+		for (int i = 0; i <= size(); i--) {
+			array = (E[]) queue.toArray();
+		}
+		return array;
 	}
 
 	/**
@@ -147,5 +151,20 @@ public class StackQueueImpl<E> implements Stack<E> {
 		return resp;
 	}
 
+	/**
+	 * 
+	 * @return o elemento.
+	 */
+	protected E getElement(){
+		return element;
+	}
+	
+	/**
+	 * Seta o elemento.
+	 * @param element
+	 */
+	protected void setElement(E element){
+		this.element = element;
+	}
 
 }
