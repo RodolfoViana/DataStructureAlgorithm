@@ -35,10 +35,10 @@ import eda.util.Constants;
 public class QueueImpl<E> implements Queue<E> {
 
 	private int index;
+	private E[] array;
 	private int tamanhoInicial;
 	private int tamanhoAtual;
 	private int tamanhoMaximo;
-	private E[] array;
 	private final int FATOR = Constants.INCREASING_FACTOR;
 
 	/**
@@ -49,20 +49,25 @@ public class QueueImpl<E> implements Queue<E> {
 		tamanhoInicial = Constants.INITIAL_SIZE_OF_STRUCTURE;
 		tamanhoMaximo = Constants.MAX_SIZE_OF_STRUCTURE;
 		array = (E[]) new Object[tamanhoInicial];
+		tamanhoAtual = array.length;
 	}
-
+	
 	/**
 	 * Metodo que enfileira um elemento na fila, seguindo a politica FIFO.
 	 */
 	@Override
 	public void enqueue(E element) throws ADTOverflowException {
+
+		// metodo refeito		
 		if (!full()) {
-			if (array.length == tamanhoAtual) {
+			if (counter() == array.length -1 || counter() == array.length) {
 				aumentaTamanhoFila();
 				array[++index] = element;
-			} else {
-				throw new ADTOverflowException();
+			} else { 
+				array[++index] = element;
 			}
+		} else {
+			throw new ADTOverflowException();
 		}
 	}
 
@@ -72,13 +77,15 @@ public class QueueImpl<E> implements Queue<E> {
 	 */
 	@Override
 	public E dequeue() throws ADTUnderflowException {
-		E proximoElemento = (E) new Object();
+		E elementoRemovido = (E) new Object();
 		if (isEmpty()) {
 			throw new ADTUnderflowException();
+		} else {
+			elementoRemovido = array[0];
+			array[0] = null;
+			shiftLeft();
 		}
-		proximoElemento = array[0];
-		shiftLeft();
-		return proximoElemento;
+		return elementoRemovido;
 	}
 
 	/**
@@ -155,22 +162,30 @@ public class QueueImpl<E> implements Queue<E> {
 	 */
 	@SuppressWarnings("unchecked")
 	protected void aumentaTamanhoFila() {
-		if (array.length < tamanhoMaximo) {
-			this.tamanhoAtual = tamanhoAtual + FATOR;
-
-			// Cria um novo array e passa os dados do array atual para um novo
-			// array
-			E[] arrayAux = (E[]) new Object[tamanhoAtual];
-			for (int i = 0; i <= arrayAux.length; i++) {
-				arrayAux[i] = array[i];
+		// TAMANHO MAXIMO = 100 TAMANHO INICIAL = 30 FATOR = 20
+		// se o numero de espacos alocados no array foi igual ao seu proprio tamanho, aumenta
+		
+		
+			E[] array2 = (E[]) new Object[array.length];
+			
+			
+			// joga os elementos do array menor pro maior
+			for (int i = 0; i <= array.length; i++) {
+				array2[i] = array[i];
 			}
-			// Cria-se uma nova instancia
-			array = (E[]) new Object[tamanhoAtual];
-			// Migra-se os dados
-			for (int i = 0; i < arrayAux.length; i++) {
-				array[i] = arrayAux[i];
+			
+			// refaz o array menor com o tamanho novo  (tamanho antigo + fator)
+			// se o numero de alocacoes for 90, so pode por mais 10
+			if (counter() == 90) {
+				array = (E[]) new Object[array.length + 10];
+			} else {
+				array = (E[]) new Object[array.length + FATOR];
 			}
-		}
+			
+			// joga os elementos do array2 pro array 1
+			for (int i = 0; i < array2.length; i++) {
+				array[i] = array2[i];
+			}
 	}
 
 	public String toString() {
