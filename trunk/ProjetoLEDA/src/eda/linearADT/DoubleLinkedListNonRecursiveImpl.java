@@ -1,5 +1,6 @@
 package eda.linearADT;
 
+
 import eda.util.ADTNoSuchElement;
 import eda.util.ADTOverflowException;
 import eda.util.ADTUnderflowException;
@@ -29,10 +30,11 @@ class DoubleLinkedListNode{
  * estrutura. Faca protected qualquer outro metodo auxiliar.
  */
 public class DoubleLinkedListNonRecursiveImpl<E> implements DoubleLinkedList<E> {
+	
+	
 
 	@Override
 	public boolean isEmpty() {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
@@ -97,13 +99,11 @@ public class DoubleLinkedListNonRecursiveImpl<E> implements DoubleLinkedList<E> 
 
 	@Override
 	public boolean isHead() {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
 	public DoubleLinkedList<E> addFirst(int numero) throws ADTOverflowException {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
@@ -124,5 +124,6 @@ public class DoubleLinkedListNonRecursiveImpl<E> implements DoubleLinkedList<E> 
 		// TODO Auto-generated method stub
 
 	}
+
 
 }
