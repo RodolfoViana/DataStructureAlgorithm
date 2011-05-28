@@ -9,7 +9,7 @@ package eda.linearADT;
  * 			Rodolfo Viana
  * 			Talita Lobo
  *  
- * Implementacao da Classe Fila
+ *          Implementacao da Classe Fila
  */
 import eda.util.ADTOverflowException;
 import eda.util.ADTUnderflowException;
