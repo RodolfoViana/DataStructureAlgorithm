@@ -210,6 +210,38 @@ public class DoubleLinkedListRecursiveImpl<E> implements DoubleLinkedList<E> {
 		// Auto-generated method stub
 		return null;
 	}
+	
+	@Override
+	public boolean equals(Object obj){
+		boolean resp = false;
+		
+		
+		
+		if (! (obj instanceof DoubleLinkedList)){
+			return false;
+		}
+		
+		@SuppressWarnings("rawtypes")
+		DoubleLinkedListRecursiveImpl newObj = (DoubleLinkedListRecursiveImpl) obj;
+		
+		
+			
+		if (newObj.size() == this.size()){
+			if (isEmpty() == newObj.isEmpty()){
+				return true;
+			}else {
+				if (newObj.getElement().equals(this.getElement())){
+					getNext().equals(newObj.getNext());
+					resp = true;
+				} else {
+					resp = false;
+				}
+			}			
+			
+		}
+		
+		return resp;
+	}
 
 	public E getElement() {
 		return element;
@@ -234,5 +266,7 @@ public class DoubleLinkedListRecursiveImpl<E> implements DoubleLinkedList<E> {
 	public void setBefore(DoubleLinkedList<E> before) {
 		this.before = before;
 	}
+	
+	
 
 }
