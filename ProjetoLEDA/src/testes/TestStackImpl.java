@@ -42,10 +42,7 @@ public class TestStackImpl {
 		 
 		 stack1.push("elemento1");
 		 Assert.assertEquals("Array tem 1 elemento", "[elemento1]", stack1.toString() );
-		 stack1.push("elemento2");
-		 System.out.println(stack1.toString());	
+		 stack1.push("elemento2");	
 		 Assert.assertEquals("Array tem 2 elementos",  "[elemento1, elemento2]", stack1.toString());
-
-
 	 }
 }
