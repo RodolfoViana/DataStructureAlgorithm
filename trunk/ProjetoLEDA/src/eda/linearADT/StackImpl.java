@@ -59,7 +59,9 @@ public class StackImpl<E> implements Stack<E> {
 	@SuppressWarnings("unchecked")
 	protected void aumentaTamanho() {
 
-		if ((array.length < tamanhoMaximo)) {
+		// ISSO TA ERRADO PRODUCAO
+		
+		if ((counter() < tamanhoMaximo)) {
 			this.tamanhoAtual = (tamanhoAtual + FATOR);
 
 			// cria um novo array com o tamanho maior
@@ -81,17 +83,35 @@ public class StackImpl<E> implements Stack<E> {
 	}
 
 	/**
+	 * 
+	 * @return a quantidade de espacos alocados no array
+	 */
+	protected int counter() {
+		int counter = 0;
+		for (int i = 0; i <= array.length - 1; i++) {
+			if (array[i] != null) {
+				counter++;
+			}
+		}
+		return counter;
+	}
+
+	/**
 	 * Metodo que adiciona o elemento na pilha, retornando excessao caso a
 	 * estrutura esteja cheia.
 	 */
 	@Override
 	public void push(E element) throws ADTOverflowException {
+		int c = counter();
+		// tamanho inicial, tamanho atual, tamanho maximo
+
 		if (!full()) {
-			if (array.length == tamanhoAtual) {
+			if (c == tamanhoAtual) {
 				aumentaTamanho();
-				array[array.length + 1] = element; // element getValor()
+				// insere o elemento na proxima posicao vazia
+				array[counter() + 1] = element;
 			} else {
-				array[array.length + 1] = element; // element getValor()
+				array[counter() + 1] = element;
 			}
 		} else {
 			throw new ADTOverflowException();
@@ -139,7 +159,7 @@ public class StackImpl<E> implements Stack<E> {
 	 */
 	@Override
 	public boolean isEmpty() {
-		return array.length == 0;
+		return counter() == 0;
 	}
 
 	/**
@@ -157,4 +177,22 @@ public class StackImpl<E> implements Stack<E> {
 	public int size() {
 		return array.length;
 	}
+
+	/**
+	 * metodo auxiliar
+	 */
+	@Override
+	public String toString() {
+		if (isEmpty())
+			return "[]";
+
+		String impressao = "[";
+		for (int i = 0; i <= array.length - 1; i++) {
+			if (array[i] != null)
+				impressao += array[i] + ", ";
+
+		}
+		return impressao.substring(0, impressao.length() - 2) + "]";
+	}
+
 }
