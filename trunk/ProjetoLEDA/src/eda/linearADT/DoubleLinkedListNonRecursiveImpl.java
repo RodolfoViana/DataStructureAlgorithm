@@ -223,20 +223,50 @@ public class DoubleLinkedListNonRecursiveImpl<E> implements DoubleLinkedList<E> 
 
 	@Override
 	public int maximum() {
-		// TODO Auto-generated method stub
-		return 0;
+		int resp = (Integer) head.getElement();
+		
+		DoubleLinkedListNode aux = head;
+		
+		for (int i = 0; i < size(); i++){
+			if ((Integer) aux.getElement() < (Integer)((DoubleLinkedListNode) aux.getNext()).getElement()){
+				resp = (Integer)((DoubleLinkedListNode) aux.getNext()).getElement();
+			}
+			
+			aux = aux.getNext();
+		}
+			
+		return resp;
 	}
 
 	@Override
 	public int minimum() {
-		// TODO Auto-generated method stub
-		return 0;
+		int resp = (Integer) head.getElement();
+		
+		DoubleLinkedListNode aux = head;
+		
+		for (int i = 0; i < size(); i++){
+			if ((Integer) aux.getElement() > (Integer)((DoubleLinkedListNode) aux.getNext()).getElement()){
+				resp = (Integer)((DoubleLinkedListNode) aux.getNext()).getElement();
+			}
+			aux = aux.getNext();
+		}
+			
+		return resp;
 	}
 
+	@SuppressWarnings({"unchecked" })
 	@Override
 	public E[] toArray() {
-		// TODO Auto-generated method stub
-		return null;
+		E[] resp = (E[]) new Object[size()];
+		
+		DoubleLinkedListNode aux = head;
+		
+		for (int i = 0; i < size(); i++){
+			resp[i] = (E) aux.getElement();
+			aux = (DoubleLinkedListNode) aux.getNext();
+		}	
+		
+		return resp;
 	}
 
 	@Override
@@ -319,6 +349,24 @@ public class DoubleLinkedListNonRecursiveImpl<E> implements DoubleLinkedList<E> 
 			size--;
 		} 
 
+	}
+	
+	@SuppressWarnings({ "unchecked" })
+	@Override 
+	public String toString(){
+		String resp = "{";
+		
+		DoubleLinkedListNode aux = head;
+		
+		for (int i = 0; i < size(); i++){
+			resp = resp + ((E) aux.getElement()).toString() + ",";
+			aux = (DoubleLinkedListNode) aux.getNext();
+		}
+		
+		resp = resp + "}";
+		resp = resp.replaceFirst(",}", "}");
+		
+		return resp;
 	}
 
 

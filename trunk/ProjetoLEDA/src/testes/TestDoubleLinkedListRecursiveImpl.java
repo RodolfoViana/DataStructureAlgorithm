@@ -176,7 +176,30 @@ public class TestDoubleLinkedListRecursiveImpl {
 		Assert.assertArrayEquals(aux, linkedList.toArray());
 	}
 	
+	@Test public void testToString() throws ADTOverflowException{
+		linkedList.insert(2);
+		linkedList.insert(3);
+		linkedList.insert(4);
+		
+		Assert.assertEquals("Erro no toString", "{2,3,4}", linkedList.toString());
+	}
 	
+	@Test public void minimum() throws ADTOverflowException{
+		linkedList.insert(2);
+		linkedList.insert(3);
+		linkedList.insert(4);
+		linkedList.insert(1);
+		
+		Assert.assertEquals("Minimum esta errado", 1, linkedList.minimum());
+	} 
 	
+	@Test public void maximum() throws ADTOverflowException{
+		linkedList.insert(2);
+		linkedList.insert(3);
+		linkedList.insert(4);
+		
+		Assert.assertEquals("Minimum esta errado", 4, linkedList.maximum());
+	} 
+
 
 }
