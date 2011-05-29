@@ -150,6 +150,7 @@ public class DoubleLinkedListRecursiveImpl<E> implements DoubleLinkedList<E> {
 			newHead.setNext(this);
 			this.setBefore(newHead);
 
+			
 			return newHead;
 		}
 
@@ -205,10 +206,20 @@ public class DoubleLinkedListRecursiveImpl<E> implements DoubleLinkedList<E> {
 		}
 	}
 	
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override
 	public E[] toArray(){
-		// Auto-generated method stub
-		return null;
+		
+		E[] resp = (E[]) new Object[size()];
+		
+		DoubleLinkedListRecursiveImpl aux = this;
+		
+		for (int i = 0; i < size(); i++){
+			resp[i] = (E) aux.getElement();
+			aux = (DoubleLinkedListRecursiveImpl) aux.getNext();
+		}	
+		
+		return resp;
 	}
 	
 	@Override

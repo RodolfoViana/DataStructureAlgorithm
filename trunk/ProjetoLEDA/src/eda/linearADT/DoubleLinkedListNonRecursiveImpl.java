@@ -86,8 +86,6 @@ public class DoubleLinkedListNonRecursiveImpl<E> implements DoubleLinkedList<E> 
 	private DoubleLinkedListNode head;
 	private DoubleLinkedListNode tail;
 	private int size;
-	
-	
 
 	@Override
 	public boolean isEmpty() {
