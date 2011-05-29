@@ -2,8 +2,6 @@ package eda.linearADT;
 
 import eda.util.ADTNoSuchElement;
 import eda.util.ADTOverflowException;
-import eda.util.ADTUnderflowException;
-import eda.util.Constants;
 
 /**
  * Universidade Federal de Campina Grande
@@ -36,18 +34,8 @@ public class SingleLinkedListRecursiveImpl<E extends Comparable<E>> implements
 		LinkedList<E> {
 
 	private E element;
-	@SuppressWarnings("rawtypes")
-	private SingleLinkedListNode head;
-	@SuppressWarnings("rawtypes")
-	private SingleLinkedListNode next;
-	private int size = 0;
-	private E[] array;
-
-	public SingleLinkedListRecursiveImpl() {
-		array = (E[]) new Object[eda.util.Constants.INITIAL_SIZE_OF_STRUCTURE];
-		head = null;
-		next = head;
-	}
+	private LinkedList<E> head;
+	private LinkedList<E> next;
 
 	/**
 	 * @return True caso a lista esteja vazia, false caso contrario
@@ -80,18 +68,28 @@ public class SingleLinkedListRecursiveImpl<E extends Comparable<E>> implements
 	 */
 	@Override
 	public int size() {
+		int size = 0;
+		if(this.getNext() != null){ 
+			size = 1 + this.getNext().size();
+		}
 		return size;
 	}
 
 	/**
 	 * Insere um elemento na lista
 	 */
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	public void insert(E element) throws ADTOverflowException {
-		if (!full()) {
-			this.next = new SingleLinkedListNode<E>(null, element);
-			this.next = this.next.getNext();
-			size++;
+		if (this.isEmpty()) {
+			this.setElement(element);
+			this.setNext(new SingleLinkedListRecursiveImpl());
+		} else {
+			if (this.full()) {
+				throw new ADTOverflowException();
+			} else {
+				((SingleLinkedListRecursiveImpl) this.getNext()).insert(element);
+			}
 		}
 	}
 
@@ -118,25 +116,36 @@ public class SingleLinkedListRecursiveImpl<E extends Comparable<E>> implements
 	/**
 	 * Remove um elemento na lista
 	 */
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override
-	public void remove(E element) {
-		/*
-		 * vou ajeitar os erros
-		 * 
-		 * if (!isEmpty()){ if(this.element == element){ this.element =
-		 * (E)((SingleLinkedListNode) next).getElement(); this.next =
-		 * ((SingleLinkedListNode) this.getNext()).getNext(); } else {
-		 * ((LinkedList<E>) this.next).remove(element); } }
-		 */
+	public void remove(E element) { 
+		if (!isEmpty()){ 
+			if(this.element == element){ 
+				this.element = (E)((SingleLinkedListRecursiveImpl) next).getElement();
+				this.next = ((SingleLinkedListRecursiveImpl) this.getNext()).getNext(); 
+			} else {
+				((LinkedList<E>) this.next).remove(element); } }
 	}
 
 	/**
 	 * 
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public LinkedList<E> revert() {
-		// TODO Auto-generated method stub
-		return null;
+		SingleLinkedListRecursiveImpl<E> resp = new SingleLinkedListRecursiveImpl<E>();
+		
+		if (!isEmpty()){
+			resp = (SingleLinkedListRecursiveImpl<E>) getNext().revert();
+			
+			try {
+				resp.insert(getElement());
+			} catch (ADTOverflowException e) {
+				e.printStackTrace();
+			}
+		}
+	
+		return resp;
 	}
 
 	/**
@@ -157,13 +166,18 @@ public class SingleLinkedListRecursiveImpl<E extends Comparable<E>> implements
 		return 0;
 	}
 
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	public E[] toArray() {
-		SingleLinkedListNode elemento = head;
-		for (int i = 0; i < size(); i++) {
-			array[i] = (E) elemento.getValue();
-			elemento = elemento.getNext();
+		E[] array = (E[]) new Object[size()];
+		
+		SingleLinkedListRecursiveImpl aux = this;
+		
+		  for (int i = 0; i < size(); i++) {
+			array[i] = (E) aux.getElement();
+			aux = (SingleLinkedListRecursiveImpl) aux.getNext();
 		}
+		  
 		return array;
 	}
 
@@ -182,5 +196,16 @@ public class SingleLinkedListRecursiveImpl<E extends Comparable<E>> implements
 	public void setElement(E element) {
 		this.element = element;
 	}
+
+	public LinkedList getNext() {
+		return next;
+	}
+
+	public void setNext(LinkedList next) {
+		this.next = next;
+	}
+	
+	
+	
 
 }

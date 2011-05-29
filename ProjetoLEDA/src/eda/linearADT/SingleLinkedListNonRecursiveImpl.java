@@ -49,34 +49,31 @@ class SingleLinkedListNode<E>{
  * definidas em eda.util.Constantes para inicializar os valores internos de sua 
  * estrutura. Faca protected qualquer outro metodo auxiliar.
  */
-public class SingleLinkedListNonRecursiveImpl<E> implements LinkedList<E> {
+public class SingleLinkedListNonRecursiveImpl<E extends Comparable<E>> implements LinkedList<E> {
 	
-	private SingleLinkedListNode next;
-	private int size = 0;
+	private SingleLinkedListNode<E> head;
+	private SingleLinkedListNode<E> next;
+	private int size;
+
+	public SingleLinkedListNonRecursiveImpl() {
+		head=null;
+		next=null;
+		size=0;
+	}
 	
-	/**
-     * @return True caso a lista esteja vazia, false caso contrario
-     */
 	@Override
 	public boolean isEmpty() {
-		boolean resp = false;
-        
-        if (this.next == null){
-            resp = true;
-        }
-        return resp;
+		boolean resp = head==null;
+		return resp;
 	}
+
 
 	/**
      * @return True caso a pilha esteja cheia, false caso contrario
      */
-    @Override
+	@Override
 	public boolean full() {
-		boolean resp = false;
-		
-		if (size() >= eda.util.Constants.MAX_SIZE_OF_STRUCTURE ){
-			resp = true;
-		}
+		boolean resp =  size() >= eda.util.Constants.MAX_SIZE_OF_STRUCTURE;
 		return resp;
 	}
     
@@ -88,45 +85,149 @@ public class SingleLinkedListNonRecursiveImpl<E> implements LinkedList<E> {
 		return size;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public void insert(E element) throws ADTOverflowException {
-		// TODO Auto-generated method stub
-
+		if (!full()) {
+			next.setNext(new SingleLinkedListNode<E>(null, element));
+			next=next.getNext();
+			size++;
+		}
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public int search(E element) throws ADTNoSuchElement {
-		// TODO Auto-generated method stub
-		return 0;
+		
+		if (head==null) throw new ADTNoSuchElement();
+		
+		SingleLinkedListNode<E> it = head;
+		int count = 0;
+		
+		while (it.getNext()!=null) {
+			if (it.getValue().equals(element)) {
+				return count;
+			}
+			it=it.getNext();
+			count++;
+		}
+		
+		return -1;
 	}
+	
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public void remove(E element) {
-		// TODO Auto-generated method stub
-
+		try {
+			int position = search(element);
+			
+			SingleLinkedListNode<E> it = head;
+			int count = 0;
+			
+			while (it.getNext()!=null) {
+				if (count==position) {
+					it.setNext(it.getNext());
+				}
+				it=it.getNext();
+				count++;
+			}
+			size--;
+		} catch (ADTNoSuchElement e) {
+			return;
+		}
 	}
 
 	@Override
 	public LinkedList<E> revert() {
-		// TODO Auto-generated method stub
-		return null;
+		int elementNumber = size;
+		
+		LinkedList<E> result = new SingleLinkedListNonRecursiveImpl<E>();
+		
+		while (elementNumber>=0) {
+			try {
+				result.insert(getAtIndex(elementNumber).getValue());
+			} catch (ADTOverflowException e) {}
+			elementNumber--;
+		}
+		
+		return result;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public int maximum() {
-		// TODO Auto-generated method stub
-		return 0;
+		if (head==null) return -1;
+		SingleLinkedListNode<E> it = head;
+		SingleLinkedListNode<E> max = head;
+		
+		while (it.getNext()!=null) {
+			if (max.getValue().compareTo(it.getValue())<0) {
+				max=it;
+			}
+			it=it.getNext();
+		}
+		
+		try {
+			return search(max.getValue());
+		} catch (ADTNoSuchElement e) {
+			return -1;
+		}
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public int minimum() {
-		// TODO Auto-generated method stub
-		return 0;
+		if (head==null) return -1;
+		SingleLinkedListNode<E> it = head;
+		SingleLinkedListNode<E> min = head;
+		
+		while (it.getNext()!=null) {
+			if (min.getValue().compareTo(it.getValue())>0) {
+				min=it;
+			}
+			it=it.getNext();
+		}
+		
+		try {
+			return search(min.getValue());
+		} catch (ADTNoSuchElement e) {
+			return -1;
+		}
 	}
 	
+	@SuppressWarnings("unchecked")
 	@Override
 	public E[] toArray(){
-		// TODO Auto-generated method stub
+		Object[] result = new Object[size];
+		
+		SingleLinkedListNode<E> it = head;
+		int count = 0;
+		
+		while (it.getNext()!=null) {
+			result[count]=it.getValue();
+			it=it.getNext();
+			count++;
+		}
+		
+		return (E[]) result;
+	}
+	
+	
+	//metodos auxiliares
+	
+	@SuppressWarnings("unchecked")
+	private SingleLinkedListNode<E> getAtIndex(int index) {
+		SingleLinkedListNode<E> it = head;
+		int count = 0;
+		
+		while (it.getNext()!=null) {
+			if (index==count) {
+				return it;
+			}
+			it=it.getNext();
+			count++;
+		}
 		return null;
 	}
 
