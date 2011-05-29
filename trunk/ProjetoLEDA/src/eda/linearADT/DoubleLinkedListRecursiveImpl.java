@@ -108,9 +108,6 @@ public class DoubleLinkedListRecursiveImpl<E> implements DoubleLinkedList<E> {
 
 		if (!isEmpty()) {
 			resp = (DoubleLinkedListRecursiveImpl<E>) getNext().revert();
-
-			// se eu mudar a assinatura do metodo nao precisa desse try, mas nao
-			// sei se a gente pode fazer isso
 			try {
 				resp.insert(getElement());
 			} catch (ADTOverflowException e) {
@@ -121,45 +118,46 @@ public class DoubleLinkedListRecursiveImpl<E> implements DoubleLinkedList<E> {
 		return resp;
 	}
 
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override
 	public int maximum() {
-		int resp = (Integer) this.getElement();
+		E resp = null;
 
-		if (!isEmpty() && !getNext().isEmpty()) {
-			if ((Integer) this.getElement() < (Integer) ((DoubleLinkedListRecursiveImpl<E>) getNext())
-					.getElement()) {
-				resp = (Integer) ((DoubleLinkedListRecursiveImpl<E>) getNext())
-						.getElement();
-				if (((DoubleLinkedListRecursiveImpl<E>) getNext()).getNext() == null) {
-					return resp;
-				} else {
-					this.getNext().maximum();
+		DoubleLinkedListRecursiveImpl aux = this;
+
+		for (int i = 0; i < size(); i++) {
+			if (resp == null){
+				resp = (E) aux.getElement();
+			} else {
+				if ((Integer) resp < (Integer) aux.getElement()){
+					resp = (E) aux.getElement();
 				}
-
 			}
+			aux = (DoubleLinkedListRecursiveImpl) aux.getNext();
 		}
-		return resp;
+
+		return (Integer) resp;
 	}
 
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override
 	public int minimum() {
-		int resp = (Integer) this.getElement();
+		E resp = null;
 
-		if (!isEmpty() && !getNext().isEmpty()) {
-			if ((Integer) this.getElement() > (Integer) ((DoubleLinkedListRecursiveImpl<E>) getNext())
-					.getElement()) {
-				resp = (Integer) ((DoubleLinkedListRecursiveImpl<E>) getNext())
-						.getElement();
-				if (((DoubleLinkedListRecursiveImpl<E>) getNext()).getNext() == null) {
-					return resp;
-				}
+		DoubleLinkedListRecursiveImpl aux = this;
 
-				else {
-					this.getNext().minimum();
+		for (int i = 0; i < size(); i++) {
+			if (resp == null){
+				resp = (E) aux.getElement();
+			} else {
+				if ((Integer) resp > (Integer) aux.getElement()){
+					resp = (E) aux.getElement();
 				}
 			}
+			aux = (DoubleLinkedListRecursiveImpl) aux.getNext();
 		}
-		return resp;
+
+		return (Integer) resp;
 
 	}
 
@@ -182,11 +180,14 @@ public class DoubleLinkedListRecursiveImpl<E> implements DoubleLinkedList<E> {
 			@SuppressWarnings("rawtypes")
 			DoubleLinkedListRecursiveImpl newHead = new DoubleLinkedListRecursiveImpl();
 
-			newHead.setElement(numero);
-			newHead.setNext(this);
-			this.setBefore(newHead);
-
-			return newHead;
+			newHead.setElement(getElement());
+			newHead.setNext(getNext());
+			newHead.setBefore(this);
+			
+			this.setElement((E)(Object)numero);
+			this.setNext(newHead);
+			
+			return this;
 		}
 
 	}
@@ -195,9 +196,6 @@ public class DoubleLinkedListRecursiveImpl<E> implements DoubleLinkedList<E> {
 	@Override
 	public void addLast(int numero) throws ADTOverflowException {
 		if (this.isEmpty()) {
-
-			// nao sei fazer de forma diferente, mas acho que ta errado
-			// dessa forma que fiz
 			Object newNumero = (Object) numero;
 
 			this.setElement((E) newNumero);

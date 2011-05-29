@@ -89,28 +89,25 @@ public class TestDoubleLinkedListRecursiveImpl {
 		aux[1] = 3;
 		aux[2] = 4;
 		
-		
-		
-		
 		Assert.assertArrayEquals(aux, linkedList.toArray());
 		
-//		linkedList.addFirst(10);
-//		
-//		aux = new Integer[4];
-//		aux[0] = 10;
-//		aux[1] = 2;
-//		aux[2] = 3;
-//		aux[3] = 4;
-//		
-//		Assert.assertArrayEquals(aux, linkedList.toArray());
+		linkedList.addFirst(10);
+		
+		aux = new Integer[4];
+		aux[0] = 10;
+		aux[1] = 2;
+		aux[2] = 3;
+		aux[3] = 4;
+		
+		Assert.assertArrayEquals(aux, linkedList.toArray());
 
-//		
-//		DoubleLinkedListRecursiveImpl<Integer> linkedList2 = new DoubleLinkedListRecursiveImpl<Integer>();
-//		linkedList2.insert(2);
-//		linkedList2.insert(3);
-//		linkedList2.insert(4);
-//		
-//		
+		
+		DoubleLinkedListRecursiveImpl<Integer> linkedList2 = new DoubleLinkedListRecursiveImpl<Integer>();
+		linkedList2.insert(2);
+		linkedList2.insert(3);
+		linkedList2.insert(4);
+		
+		
 		
 	}
 	
@@ -187,19 +184,125 @@ public class TestDoubleLinkedListRecursiveImpl {
 	@Test public void minimum() throws ADTOverflowException{
 		linkedList.insert(2);
 		linkedList.insert(3);
+		linkedList.insert(0);
 		linkedList.insert(4);
 		linkedList.insert(1);
 		
-		Assert.assertEquals("Minimum esta errado", 1, linkedList.minimum());
+		Assert.assertEquals("Minimum esta errado", 0, linkedList.minimum());
 	} 
 	
 	@Test public void maximum() throws ADTOverflowException{
 		linkedList.insert(2);
 		linkedList.insert(3);
+		linkedList.insert(30);
 		linkedList.insert(4);
 		
-		Assert.assertEquals("Minimum esta errado", 4, linkedList.maximum());
+		Assert.assertEquals("Minimum esta errado", 30, linkedList.maximum());
 	} 
+	
+	@Test public void full() throws ADTOverflowException{
+		
+		for (int i = 0; i < 99; i++){
+			linkedList.insert(i);
+		}
+		
+		Assert.assertFalse(linkedList.full());
+		linkedList.insert(100);
+		Assert.assertTrue(linkedList.full());
+	}
+	
+	@Test public void insertException() throws ADTOverflowException{
+		for (int i = 0; i < 99; i++){
+			linkedList.insert(i);
+		}
+		
+		Assert.assertFalse(linkedList.full());
+		linkedList.insert(100);
+		
+		
+		try {
+			Assert.assertTrue(linkedList.full());
+			Assert.assertEquals("Erro no size", 100, linkedList.size());
+			linkedList.insert(101);
+		} catch (ADTOverflowException e){
+			Assert.assertEquals("Structure is full", e.getMessage());
+		}
+	} 
+	
+	@Test public void searchException() throws ADTOverflowException{
+		Assert.assertTrue(linkedList.isEmpty());
+		
+		linkedList.insert(2);
+		linkedList.insert(3);
+		linkedList.insert(30);
+		linkedList.insert(4);
+		
+		Assert.assertEquals("Erro no toString", "{2,3,30,4}", linkedList.toString());
+		Assert.assertEquals("Erro no size", 4, linkedList.size());
+		Assert.assertFalse(linkedList.isEmpty());
+		
+		try {
+			linkedList.search(10);
+		} catch (ADTNoSuchElement e){
+			Assert.assertEquals("No such element is in the structure", e.getMessage());
+		}
+	}
+	
+	@Test public void addFirstException() throws ADTOverflowException {
+		for (int i = 0; i < 99; i++){
+			linkedList.addFirst(i);
+		}
+		
+		Assert.assertFalse(linkedList.full());
+		linkedList.addFirst(100);
+		
+		
+		try {
+			Assert.assertTrue(linkedList.full());
+			Assert.assertEquals("Erro no size", 100, linkedList.size());
+			linkedList.addFirst(101);
+		} catch (ADTOverflowException e){
+			Assert.assertEquals("Structure is full", e.getMessage());
+		}
+	}
+	
+	@Test public void addLastException() throws ADTOverflowException {
+		for (int i = 0; i < 99; i++){
+			linkedList.addLast(i);
+		}
+		
+		Assert.assertFalse(linkedList.full());
+		linkedList.addLast(100);
+		
+		
+		try {
+			Assert.assertTrue(linkedList.full());
+			Assert.assertEquals("Erro no size", 100, linkedList.size());
+			linkedList.addLast(101);
+		} catch (ADTOverflowException e){
+			Assert.assertEquals("Structure is full", e.getMessage());
+		}
+	}
+	
+	@Test public void removeFirstException() {
+		Assert.assertTrue(linkedList.isEmpty());
+		
+		try {
+			linkedList.removeFirst();
+		} catch (ADTUnderflowException e) {
+			Assert.assertEquals("Structure is empty", e.getMessage());
+		}
+	}
+	
+	@Test public void removeLastException() {
+		Assert.assertTrue(linkedList.isEmpty());
+		
+		try {
+			linkedList.removeLast();
+		} catch (ADTUnderflowException e) {
+			Assert.assertEquals("Structure is empty", e.getMessage());
+		}
+	}
 
 
 }
