@@ -21,12 +21,13 @@ public class TestDoubleLinkedListNonRecursiveImpl {
 	
 	@Test public void insert() throws ADTOverflowException{
 		Assert.assertTrue(linkedList.isEmpty());
-		
 		linkedList.insert(10);
 		Assert.assertEquals("Erro no insert", 1, linkedList.size());
 		linkedList.insert(15);
 		Assert.assertEquals("Erro no insert", 2, linkedList.size());		
 	}
+	
+	
 	
 
 }
