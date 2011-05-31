@@ -1,27 +1,39 @@
 package eda.linearADT;
+
 import java.util.Scanner;
 
-
 public class EstruturasLineares {
+
+	private static QueueImpl<String> queue = new QueueImpl<String>();
+	
+	private static StackImpl<String> stack = new StackImpl<String>();
+	private static StackQueueImpl<String> stackQueue = new StackQueueImpl<String>();
+	private static StackLinkedListImpl<String> stackLinkedList = new StackLinkedListImpl<String>();
+	
+	private static SingleLinkedListNonRecursiveImpl<String> singleLinkedListNonRecursive = new SingleLinkedListNonRecursiveImpl<String>();
+	private static SingleLinkedListRecursiveImpl<String> singleLinkedListRecursive = new SingleLinkedListRecursiveImpl<String>();
+	
+	private static DoubleLinkedListNonRecursiveImpl<String> doubleLinkedListNonRecursive = new DoubleLinkedListNonRecursiveImpl<String>();
+	private static DoubleLinkedListRecursiveImpl<String> doubleLinkedListRecursive = new DoubleLinkedListRecursiveImpl<String>();
 	
 	private int estrutura;
-	
+
 	public static void main(String[] args) {
 
 	}
-	
+
 	public void head() {
-		System.out.print("    Universidade Federal de Campina Grande\n" +
-	         	 "        Disciplina: Laboratorio de Estrutura de Dados\n" +
-		         "        Projeto Implementacao das Estruturas Lineares\n" +
-		         "        Lista Ligada (Simples e Dupla), Fila, Pilha");
+		System.out.print("    Universidade Federal de Campina Grande\n"
+				+ "        Disciplina: Laboratorio de Estrutura de Dados\n"
+				+ "        Projeto Implementacao das Estruturas Lineares\n"
+				+ "        Lista Ligada (Simples e Dupla), Fila, Pilha");
 	}
-		
+
 	/**
 	 * Menu com as opcoes das implementacoes das Estruturas Lineares.
 	 */
 	public void menuEstruturas(int estrutura) {
-		
+
 		Scanner sc = new Scanner(System.in);
 		System.out.println("================ Menu ===============");
 		System.out.println(" 1 - Pilha");
@@ -32,7 +44,7 @@ public class EstruturasLineares {
 		System.out.println("Digite a Opção: ");
 		System.out.println("=====================================");
 		int opcao = sc.nextInt();
-		
+
 		switch (estrutura) {
 
 		case 1:
@@ -40,13 +52,13 @@ public class EstruturasLineares {
 
 		case 2:
 			menuFila();
-			
+
 		case 3:
 			menuListaSimples();
-			
+
 		case 4:
 			menuListaDupla();
-          
+
 		case 5:
 			System.out.println("FIM");
 			System.exit(0);
@@ -62,7 +74,7 @@ public class EstruturasLineares {
 	 * Menu com as opcoes da implementacao de Pilha.
 	 */
 	public void menuPilha() {
-		
+
 		Scanner sc = new Scanner(System.in);
 		System.out.println("=============== PILHA ===============");
 		System.out.println(" ");
@@ -73,18 +85,18 @@ public class EstruturasLineares {
 		System.out.println("Digite a Opção: ");
 		System.out.println("=====================================");
 		int opcao = sc.nextInt();
-		
+
 		switch (estrutura) {
 
 		case 1:
-//			implPilha();
+			// implPilha();
 
 		case 2:
-//			implPilhaComLinkedList();
-			
+			// implPilhaComLinkedList();
+
 		case 3:
-//          implPilhaComFila();
-			
+			// implPilhaComFila();
+
 		case 4:
 			main(null);
 
@@ -92,9 +104,9 @@ public class EstruturasLineares {
 			System.out.println("Opção inválida!");
 			break;
 		}
-		
+
 	}
-	
+
 	/**
 	 * Menu com as opcoes da implementacao de Fila.
 	 */
@@ -109,11 +121,11 @@ public class EstruturasLineares {
 		System.out.println("Digite a Opção: ");
 		System.out.println("=====================================");
 		int opcao = sc.nextInt();
-		
+
 		switch (estrutura) {
 
 		case 1:
-//			implFila();
+			implFila();
 
 		case 2:
 			main(null);
@@ -122,7 +134,16 @@ public class EstruturasLineares {
 			System.out.println("Opção inválida!");
 			break;
 		}
-		
+
+	}
+
+	public void implFila() {
+		Scanner sc = new Scanner(System.in);
+		System.out.println("");
+        //	fazer algo pra que pegue os valores inseridos e imprima enfileirados.	
+		queue.toString();
+		// TODO Auto-generated method stub
+
 	}
 
 	/**
@@ -139,15 +160,15 @@ public class EstruturasLineares {
 		System.out.println("Digite a Opção: ");
 		System.out.println("=====================================");
 		int opcao = sc.nextInt();
-		
+
 		switch (estrutura) {
 
 		case 1:
-//			implSingleLinkedListRecursive();
+			// implSingleLinkedListRecursive();
 
 		case 2:
-//			implSingleLinkedListNonRecursive();
-			
+			// implSingleLinkedListNonRecursive();
+
 		case 3:
 			main(null);
 
@@ -155,9 +176,9 @@ public class EstruturasLineares {
 			System.out.println("Opção inválida!");
 			break;
 		}
-		
+
 	}
-	
+
 	/**
 	 * Menu com as opcoes da implementacao de Linked List Dupla.
 	 */
@@ -172,15 +193,15 @@ public class EstruturasLineares {
 		System.out.println("Digite a Opção: ");
 		System.out.println("=====================================");
 		int opcao = sc.nextInt();
-		
+
 		switch (estrutura) {
 
 		case 1:
-//			implDoubleLinkedListRecursive();
+			// implDoubleLinkedListRecursive();
 
 		case 2:
-//			implDoubleLinkedListNonRecursive();
-			
+			// implDoubleLinkedListNonRecursive();
+
 		case 3:
 			main(null);
 
@@ -188,8 +209,7 @@ public class EstruturasLineares {
 			System.out.println("Opção inválida!");
 			break;
 		}
-		
+
 	}
-		
-	
+
 }
