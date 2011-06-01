@@ -103,6 +103,7 @@ public class TestQueueImpl {
 		
 		Assert.assertEquals("Erro no aumentaTamanho", 29, q1.size());
 		q1.enqueue("teste " + 30);
+		Assert.assertEquals("Erro no aumentaTamanho", 30, q1.size());
 		
 	}
 	

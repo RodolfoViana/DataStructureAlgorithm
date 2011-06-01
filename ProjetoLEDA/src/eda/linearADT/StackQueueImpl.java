@@ -90,9 +90,7 @@ public class StackQueueImpl<E> implements Stack<E> {
 	/**
 	 * Retorna o elemento que se encontra no topo da pilha.
 	 */
-	@SuppressWarnings("unchecked")
 	@Override
-
 	public E top() throws ADTUnderflowException{
 		if (q1.isEmpty()) {
 			throw new ADTUnderflowException();
@@ -122,7 +120,7 @@ public class StackQueueImpl<E> implements Stack<E> {
 	@SuppressWarnings("unchecked")
 	@Override
 	public E[] toArray() {
-		for (int i = 0; i <= size(); i--) {
+		for (int i = 0; i <= size(); i++) {
 			array = (E[]) q1.toArray();
 		}
 		return array;
