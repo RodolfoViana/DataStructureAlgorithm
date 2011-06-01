@@ -7,10 +7,10 @@ public class EstruturasLineares {
 	// 8 ESTRUTURAS - instanciamento
 	
 	// SINGLE LINKED LIST NON-RECURSIVE
-	private static SingleLinkedListNonRecursiveImpl<String> singleLinkedListNonRecursive;	
+	private static SingleLinkedListNonRecursiveImpl<Integer> singleLinkedListNonRecursive = new SingleLinkedListNonRecursiveImpl<Integer>();;	
 	
 	// SINGLE LINKED LIST RECURSIVE
-	private static SingleLinkedListRecursiveImpl<String> singleLinkedListRecursive = new SingleLinkedListRecursiveImpl<String>();
+	private static SingleLinkedListRecursiveImpl<Integer> singleLinkedListRecursive = new SingleLinkedListRecursiveImpl<Integer>();
 
 	// DOUBLE LINKED LIST NON-RECURSIVE
 	private static DoubleLinkedListNonRecursiveImpl<String> doubleLinkedListNonRecursive = new DoubleLinkedListNonRecursiveImpl<String>();
@@ -104,7 +104,6 @@ public class EstruturasLineares {
 					           "Desenvolvido por: Talita, Layse, Rodolfo e Renan\n" +
 					           "Ciencia da Computacao - Prof. Adalberto");
 			System.exit(0);
-
 		default:
 			System.out.println("O programa foi encerrado com sucesso.\n");
 			break;
@@ -610,7 +609,7 @@ public class EstruturasLineares {
 				limpaScanner();
 				System.out.print("\n        Elemento a ser inserido: ");
 				int elemento = sc.nextInt();
-				// singleLinkedListRecursive.insert(elemento);
+				singleLinkedListRecursive.insert(elemento);
 				menuListaSimplesR();	
 			} catch (Exception e) {
 				menuListaSimplesR();
@@ -618,7 +617,9 @@ public class EstruturasLineares {
 			
 		case 2: // REMOVE
 			try {
-				System.out.print("\n        Elemento Removido: "); // + queue.dequeue();
+				System.out.print("\n        Elemento a ser Removido: ");
+				int elemento = sc.nextInt();
+				singleLinkedListRecursive.remove(elemento);
 				menuListaSimplesR();
 			} catch (Exception e) {
 				menuListaSimplesR();
@@ -626,8 +627,8 @@ public class EstruturasLineares {
 			
 		case 3: // MINIMO E MAXIMO
 			try {
-				System.out.println("Elemento Minimo: "); // + singleLinkedListRecursive.minimum();
-				System.out.println("Elemento Maximo: ");  // + singleLinkedListRecursive.maximum();
+				System.out.println("Elemento Minimo: " + singleLinkedListRecursive.minimum()); 
+				System.out.println("Elemento Maximo: " + singleLinkedListRecursive.maximum());
 				menuListaSimplesR();
 			} catch (Exception e) {
 				menuListaSimplesR();
@@ -638,14 +639,14 @@ public class EstruturasLineares {
 				limpaScanner();
 				System.out.print("\n        Elemento a ser pesquisado: ");
 				int elemento = sc.nextInt();
-				// singleLinkedListNonRecursive.search();
+				System.out.println(singleLinkedListNonRecursive.search(elemento));
 				menuListaSimplesR();
 			} catch (Exception e) {
 				menuListaSimplesR();
 			}
 			
 		case 5: // INFORMACOES NA ESTRUTURAS
-			singleLinkedListNonRecursive.toString();
+			System.out.println("\n        " + singleLinkedListNonRecursive.toString());
 			menuListaSimplesR();
 			
 		case 6:
@@ -682,7 +683,7 @@ public class EstruturasLineares {
 				limpaScanner();
 				System.out.print("\n        Elemento a ser inserido: ");
 				int elemento = sc.nextInt();
-				// linkedListNonRecursive.insert(elemento);
+				singleLinkedListNonRecursive.insert(elemento);
 				menuListaSimplesN();	
 			} catch (Exception e) {
 				menuListaSimplesN();
@@ -690,7 +691,10 @@ public class EstruturasLineares {
 			
 		case 2: // REMOVE
 			try {
-				System.out.print("\n        Elemento Removido: "); // + queue.dequeue();
+				limpaScanner();
+				System.out.print("\n        Elemento a ser Removido: ");
+				int elemento = sc.nextInt();
+				singleLinkedListNonRecursive.remove(elemento);
 				menuListaSimplesN();
 			} catch (Exception e) {
 				menuListaSimplesN();
@@ -698,8 +702,8 @@ public class EstruturasLineares {
 			
 		case 3: // MINIMO E MAXIMO
 			try {
-				System.out.println("Elemento Minimo: "); // + singleLinkedListNonRecursive.minimum();
-				System.out.println("Elemento Maximo: ");  // + singleLinkedListNonRecursive.maximum();
+				System.out.println("\n        Elemento Minimo: " + singleLinkedListNonRecursive.minimum());
+				System.out.println("\n        Elemento Maximo: " + singleLinkedListNonRecursive.maximum());
 				menuListaSimplesN();
 			} catch (Exception e) {
 				menuListaSimplesN();
@@ -710,14 +714,14 @@ public class EstruturasLineares {
 				limpaScanner();
 				System.out.print("\n        Elemento a ser pesquisado: ");
 				int elemento = sc.nextInt();
-				// singleLinkedListNonRecursive.search();
+				System.out.println(singleLinkedListNonRecursive.search(elemento));
 				menuListaSimplesN();
 			} catch (Exception e) {
 				menuListaSimplesN();
 			}
 			
 		case 5:
-			singleLinkedListNonRecursive.toString();
+			System.out.println("\n        " + singleLinkedListNonRecursive.toString());
 			menuListaSimplesN();
 			
 		case 6:
