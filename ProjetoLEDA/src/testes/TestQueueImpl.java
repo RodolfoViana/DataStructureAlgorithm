@@ -94,6 +94,80 @@ public class TestQueueImpl {
 		System.out.print("Head 2: ");
 		System.out.println(q1.head());
 	}
+	@Test
+	public void aumentaTamanhoFila() throws ADTOverflowException{
+		
+		for (int i = 0; i < 29; i++){
+			q1.enqueue("teste " + i);
+		}
+		
+		Assert.assertEquals("Erro no aumentaTamanho", 29, q1.size());
+		q1.enqueue("teste " + 30);
+		
+	}
 	
+	@Test public void toStringTeste() throws ADTOverflowException{
+		q1.enqueue("elemento1");
+		q1.enqueue("elemento2");
+		q1.enqueue("elemento3");
+		q1.enqueue("elemento4");
+		q1.enqueue("elemento5");
+		q1.enqueue("elemento6");
+		q1.enqueue("elemento7");
+		
+		Assert.assertEquals("Erro no toString", "[elemento1, elemento2, elemento3, elemento4, elemento5, elemento6, elemento7]", q1.toString());
+	}
+	
+	@Test public void toArray()  throws ADTOverflowException{
+		String n1 = "elemento1";
+		String n2 = "elemento2";
+		String n3 = "elemento3";
+		
+		q1.enqueue(n1);
+		q1.enqueue(n2);
+		q1.enqueue(n3);
+		
+		String[] array = new String[30];
+		array[0] = n1;
+		array[1] = n2;
+		array[2] = n3;
+		
+		Assert.assertArrayEquals(array, q1.toArray());
+		
+		
+	}
+	
+	@Test public void enqueueException() {
+		Assert.assertTrue(q1.isEmpty());
+		
+		try {
+			for (int i = 0; i < 200; i++){
+				q1.enqueue("teste" + i);
+			}
+			
+		} catch (ADTOverflowException e) {
+			Assert.assertEquals("Structure is full", e.getMessage());
+		}
+	}
+	
+	@Test public void dequeueException() throws ADTUnderflowException {
+		Assert.assertTrue(q1.isEmpty());
+		
+		try {
+			q1.dequeue();
+		} catch (ADTUnderflowException e) {
+			Assert.assertEquals("Structure is empty", e.getMessage());
+		}
+	}
+	
+	@Test public void headException() throws ADTUnderflowException {
+		Assert.assertTrue(q1.isEmpty());
+		
+		try {
+			q1.head();
+		} catch (ADTUnderflowException e) {
+			Assert.assertEquals("Structure is empty", e.getMessage());
+		}
+	}
 	
 }
