@@ -150,6 +150,8 @@ public class QueueImpl<E> implements Queue<E> {
 	}
 
 	/**
+<<<<<<< .mine
+=======
 	 * Metodo que desloca para a fila para a esquerda em um elemento
 	 */
 //	protected void shiftLeft() {
@@ -160,6 +162,7 @@ public class QueueImpl<E> implements Queue<E> {
 //	}
 
 	/**
+>>>>>>> .r61
 	 * Metodo que proporciona o crescimento da fila utilizando um fator de
 	 * crescimento.
 	 */

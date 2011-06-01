@@ -57,6 +57,9 @@ public class SingleLinkedListNonRecursiveImpl<E> implements LinkedList<E> {
 		size=0;
 	}
 	
+	/**
+	 * Verifica se a lista eh vazia.
+	 */
 	@Override
 	public boolean isEmpty() {
 		return size() == 0;
@@ -80,6 +83,9 @@ public class SingleLinkedListNonRecursiveImpl<E> implements LinkedList<E> {
 		return size;
 	}
 
+	/**
+	 * insere o elemento na lista.
+	 */
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	public void insert(E element) throws ADTOverflowException {
@@ -108,7 +114,9 @@ public class SingleLinkedListNonRecursiveImpl<E> implements LinkedList<E> {
 		}
 	}
 	
-	
+	/**
+	 * procura o elemento na lista.
+	 */
 	@SuppressWarnings({ "rawtypes" })
 	@Override
 	public int search(E element) throws ADTNoSuchElement {
@@ -134,6 +142,9 @@ public class SingleLinkedListNonRecursiveImpl<E> implements LinkedList<E> {
 		return (Integer) resp.getValue();
 	}
 
+	/**
+	 * remove um elemento da lista.
+	 */
 	@SuppressWarnings({ "unchecked", "rawtypes", "unused" })
 	@Override
 	public void remove(E element) {
@@ -177,6 +188,9 @@ public class SingleLinkedListNonRecursiveImpl<E> implements LinkedList<E> {
 		}
 	}
 
+	/**
+	 * Reverte um elemento na lista.
+	 */
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override
 	public LinkedList<E> revert() {
@@ -203,6 +217,9 @@ public class SingleLinkedListNonRecursiveImpl<E> implements LinkedList<E> {
 		
 	}
 
+	/**
+	 * retorna o maior elemento na lista.
+	 */
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	public int maximum() {
@@ -223,7 +240,10 @@ public class SingleLinkedListNonRecursiveImpl<E> implements LinkedList<E> {
 
 		return (Integer) resp;
 	}
-
+ 
+	/**
+	 * retorna o menor elemento na lista.
+	 */
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	public int minimum() {
@@ -245,6 +265,9 @@ public class SingleLinkedListNonRecursiveImpl<E> implements LinkedList<E> {
 		return (Integer) resp;
 	}
 	
+	/**
+	 * toArray.
+	 */
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	public E[] toArray(){
@@ -260,6 +283,9 @@ public class SingleLinkedListNonRecursiveImpl<E> implements LinkedList<E> {
 		return resp;		
 	}
 	
+	/**
+	 * toString
+	 */
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	public String toString() {
@@ -279,6 +305,10 @@ public class SingleLinkedListNonRecursiveImpl<E> implements LinkedList<E> {
 		return resp;
 	}
 
+	/**
+	 * 
+	 * @return o elemento da cauda.
+	 */
 	@SuppressWarnings("rawtypes")
 	public SingleLinkedListNode getTail() {
 		return tail;

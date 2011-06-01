@@ -126,7 +126,7 @@ public class SingleLinkedListRecursiveImpl<E> implements LinkedList<E> {
 	}
 
 	/**
-	 * 
+	 * Reverte o elemento na lista.
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
@@ -194,6 +194,9 @@ public class SingleLinkedListRecursiveImpl<E> implements LinkedList<E> {
 		return (Integer) resp;
 	}
 
+	/**
+	 * toArray
+	 */
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	public E[] toArray() {
@@ -235,6 +238,11 @@ public class SingleLinkedListRecursiveImpl<E> implements LinkedList<E> {
 		this.next = next;
 	}
 	
+	/**
+	 * retorna o ultimo elemento da lista.
+	 * @return
+	 * @throws ADTUnderflowException
+	 */
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public E last() throws ADTUnderflowException {
 		E elementoRemovido = getElement();
@@ -251,6 +259,11 @@ public class SingleLinkedListRecursiveImpl<E> implements LinkedList<E> {
 		return elementoRemovido;
 	}
 	
+	/**
+	 * Remove o ultimo elemento da lista.
+	 * @return
+	 * @throws ADTUnderflowException
+	 */
 	public E removeLast() throws ADTUnderflowException{
 		
 		E ultimoElemento = last();
@@ -259,6 +272,9 @@ public class SingleLinkedListRecursiveImpl<E> implements LinkedList<E> {
 		return ultimoElemento;
 	}
 	
+	/**
+	 * toString
+	 */
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override
 	public String toString() {
