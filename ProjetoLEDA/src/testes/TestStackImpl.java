@@ -91,41 +91,6 @@ public class TestStackImpl {
 		
 	}
 	
-//	@Test public void full() throws ADTOverflowException{
-//		Assert.assertTrue("Erro no isEmpty", stack1.isEmpty());
-//		Assert.assertFalse("Erro no full", stack1.full());
-//		
-//		for (int i = 0; i < 49; i++){
-//		stack1.push("teste" + i );
-//		}
-//		Assert.assertFalse("Erro no full", stack1.full());
-//		stack1.push("teste" + 100);
-//		Assert.assertTrue("Erro no full", stack1.full());
-//		
-//	}
-//	
-//	@Test public void toArray() throws ADTOverflowException{
-//		Assert.assertTrue(stack1.isEmpty());
-//		
-//		String n1 = "Teste 10";
-//		String n2 = "Teste 20";
-//		String n3 = "Teste 30";
-//		String n4 = "Teste 40";
-//		
-//		stack1.push("Teste" + n1 );
-//		stack1.push("Teste" + n2);
-//		stack1.push("Teste" + n3);
-//		stack1.push("Teste" + n4);
-//		
-//		String[] array = new String[30];
-//		array[0] = n1;
-//		array[1] = n2;
-//		array[2] = n3;
-//		array[3] = n4;
-//		
-//		Assert.assertArrayEquals("erro no toArray", array, stack1.toArray());
-//		
-//	}
 	
 	@Test public void topException() {
 		Assert.assertTrue("Erro no isEmpty", stack1.isEmpty());

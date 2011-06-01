@@ -9,6 +9,20 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+/**
+ * Universidade Federal de Campina Grande
+ * Projetos de Laboratorio de Estrutura de Dados
+ * 
+ * Equipe:  Layse Sobreira
+ * 			Renan Pinto
+ * 			Rodolfo Viana
+ * 			Talita Lobo
+ * 
+ * 	Implementacao das Estruturas Lineares
+ * 		Lista Dupla, Lista Simples, Fila e Pilha
+ * 			Testes da Classe DoubleLinkedListRecursive.java
+ */
+
 public class TestDoubleLinkedListRecursiveImpl {
 	
 	private DoubleLinkedListRecursiveImpl<Integer> linkedList;

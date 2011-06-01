@@ -9,6 +9,20 @@ import eda.util.ADTNoSuchElement;
 import eda.util.ADTOverflowException;
 import eda.util.ADTUnderflowException;
 
+/**
+ * Universidade Federal de Campina Grande
+ * Projetos de Laboratorio de Estrutura de Dados
+ * 
+ * Equipe:  Layse Sobreira
+ * 			Renan Pinto
+ * 			Rodolfo Viana
+ * 			Talita Lobo
+ * 
+ * 	Implementacao das Estruturas Lineares
+ * 		Lista Dupla, Lista Simples, Fila e Pilha
+ * 			Testes da Classe SingleLinkedListRecursive.java
+ */
+
 public class TestSingleLinkedListRecursiveImpl {
 	
 	private SingleLinkedListRecursiveImpl<Integer> linkedList;

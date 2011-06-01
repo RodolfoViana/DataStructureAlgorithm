@@ -9,6 +9,20 @@ import eda.linearADT.StackQueueImpl;
 import eda.util.ADTOverflowException;
 import eda.util.ADTUnderflowException;
 
+/**
+ * Universidade Federal de Campina Grande
+ * Projetos de Laboratorio de Estrutura de Dados
+ * 
+ * Equipe:  Layse Sobreira
+ * 			Renan Pinto
+ * 			Rodolfo Viana
+ * 			Talita Lobo
+ * 
+ * 	Implementacao das Estruturas Lineares
+ * 		Lista Dupla, Lista Simples, Fila e Pilha
+ * 			Testes da Classe StackQueueImpl.java
+ */
+
 public class TestStackQueueImpl {
 	
 	StackQueueImpl<Integer> pilha;
