@@ -180,7 +180,7 @@ public class TestDoubleLinkedListRecursiveImpl {
 		
 		Assert.assertEquals("Erro no toString", "{2,3,4}", linkedList.toString());
 	}
-	
+
 	@Test public void minimum() throws ADTOverflowException{
 		linkedList.insert(2);
 		linkedList.insert(3);

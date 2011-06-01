@@ -1,7 +1,5 @@
 package testes;
 
-import java.util.concurrent.ExecutionException;
-
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
