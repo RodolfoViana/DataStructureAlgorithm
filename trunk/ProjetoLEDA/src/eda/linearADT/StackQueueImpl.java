@@ -95,14 +95,11 @@ public class StackQueueImpl<E> implements Stack<E> {
 	@SuppressWarnings("unchecked")
 	@Override
 	public E top() throws ADTUnderflowException{
-		E element;
 		if (q1.isEmpty()) {
-			throw new ADTUnderflowException();
-		} else { 
-			element = (E) q1.head();			
+		throw new ADTUnderflowException();
 		}
-		return element;	
-	}
+		return q1.toArray()[q1.size()-1];
+		}
 
 	/**
 	 * Verifica se a pilha esta vazia.
