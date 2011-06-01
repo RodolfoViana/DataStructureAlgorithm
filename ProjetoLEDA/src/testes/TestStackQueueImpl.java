@@ -44,10 +44,10 @@ public class TestStackQueueImpl {
 		pilha.push(n4);
 		
 		Assert.assertEquals("Erro no push", 4, pilha.size());
-		Assert.assertEquals("Erro no pop", n1, pilha.pop());
+		Assert.assertEquals("Erro no pop", n4, pilha.pop());
 		
 		Assert.assertEquals("Erro no push", 2, pilha.size());
-		Assert.assertEquals("Erro no pop", n2, pilha.pop());
+		Assert.assertEquals("Erro no pop", n3, pilha.pop());
 		
 		Assert.assertEquals("Erro no push", 1, pilha.size());
 		Assert.assertEquals("Erro no pop", n3, pilha.pop());

@@ -38,8 +38,7 @@ public class StackQueueImpl<E> implements Stack<E> {
 	// implementar uma pilha usando fila
 	
 	// usar duas filas
-	private Queue<Object> queue;
-	private Queue<Object> queue2;
+	private Queue<E> q1, q2;
 	
 	private int tamanhoMaximo;
 	private final int FATOR = Constants.INCREASING_FACTOR;
@@ -51,8 +50,8 @@ public class StackQueueImpl<E> implements Stack<E> {
 	 */
 	public StackQueueImpl() {
 		tamanhoMaximo = Constants.MAX_SIZE_OF_STRUCTURE;
-		queue = new QueueImpl<Object>();
-		queue2 = new QueueImpl<Object>();
+		q1 = new QueueImpl<E>();
+		q2 = new QueueImpl<E>();
 	}
 	
 	/**
@@ -60,34 +59,34 @@ public class StackQueueImpl<E> implements Stack<E> {
 	 */
 	@Override
 	public void push(E element) throws ADTOverflowException {
-		
-		if (queue.full()) {
-			throw new ADTOverflowException();
-		} else if (queue.size() == tamanhoMaximo) {
-			throw new ADTOverflowException();
-		} else {
-			queue.enqueue(element);
-		}
-		
+		q1.enqueue(element);
 	}
 
 	/**
+	 * @throws  
 	 * Remove um elemento na pilha.
+	 * @throws  
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
-	public E pop() throws ADTUnderflowException {
-		E delete = null;
-		if(isEmpty()){
-			throw new ADTUnderflowException();
-		} else {
-			if(!queue.isEmpty()){
-				delete = (E) queue.dequeue();
-			}else if (!queue2.isEmpty()){
-				delete = (E) queue2.dequeue();
+	public E pop() throws ADTUnderflowException  {
+		while (q1.size() > 1){
+			
+			 try {
+				System.out.println(q1);
+				q2.enqueue(q1.dequeue());
+			} catch (ADTOverflowException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
-		} return delete;
-
+		     
+		}
+		E elem = q1.dequeue();
+		q1 = q2;
+		q2 = new QueueImpl<E>();
+		return elem;
+		
+		
 	}
 
 	/**
@@ -97,10 +96,10 @@ public class StackQueueImpl<E> implements Stack<E> {
 	@Override
 	public E top() throws ADTUnderflowException{
 		E element;
-		if (queue.isEmpty()) {
+		if (q1.isEmpty()) {
 			throw new ADTUnderflowException();
 		} else { 
-			element = (E) queue.head();			
+			element = (E) q1.head();			
 		}
 		return element;	
 	}
@@ -110,7 +109,7 @@ public class StackQueueImpl<E> implements Stack<E> {
 	 */
 	@Override
 	public boolean isEmpty() {
-		return queue.isEmpty() && queue2.isEmpty();
+		return q1.isEmpty() && q2.isEmpty();
 	}
 
 	/**
@@ -118,7 +117,7 @@ public class StackQueueImpl<E> implements Stack<E> {
 	 */
 	@Override
 	public boolean full() {
-		return queue.full() || queue2.full();
+		return q1.full() || q2.full();
 	}
 	
 	/**
@@ -128,7 +127,7 @@ public class StackQueueImpl<E> implements Stack<E> {
 	@Override
 	public E[] toArray(){
 		for (int i = 0; i <= size(); i--) {
-			array = (E[]) queue.toArray();
+			array = (E[]) q1.toArray();
 		}
 		return array;
 	}
@@ -138,15 +137,7 @@ public class StackQueueImpl<E> implements Stack<E> {
 	 */
 	@Override
 	public int size() {
-		int q1 = queue.size();
-		int q2 = queue2.size();
-		int resp = q2;
-		
-		if(q1 >= q2){
-			resp = q1;
-		}
-		
-		return resp;
+		return q1.size() + q2.size();
 	}
 
 	/**

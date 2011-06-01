@@ -77,16 +77,16 @@ public class QueueImpl<E> implements Queue<E> {
 	 */
 	@Override
 	public E dequeue() throws ADTUnderflowException {
-		@SuppressWarnings("unchecked")
-		E elementoRemovido = (E) new Object();
+		E elementoRemovido;
 		// se a fila estiver vazia 
 		if (isEmpty()) {
 			throw new ADTUnderflowException();
 		} else {
-			// caso contrario, encontra o elemento a ser removido e faz o shift left
 			elementoRemovido = array[0];
-			array[1] = null;
-			shiftLeft();
+			
+			for (int i = 0; i < array.length-1; i++) {
+				array[i] = array[i+1];
+			}
 		}
 		return elementoRemovido;
 	}
