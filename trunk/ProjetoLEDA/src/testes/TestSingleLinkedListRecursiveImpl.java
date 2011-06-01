@@ -63,14 +63,13 @@ public class TestSingleLinkedListRecursiveImpl {
 		linkedList.insert(n3);
 		
 		SingleLinkedListRecursiveImpl<Integer> linkedList2 = new SingleLinkedListRecursiveImpl<Integer>();
+		
 		linkedList2.insert(n3);
 		linkedList2.insert(n2);
 		linkedList2.insert(n1);
 				
 		Assert.assertTrue("Revert errado", linkedList2.equals(linkedList.revert()) );
-	}
-	*/
-	
+	}*/
 	
 	
 }

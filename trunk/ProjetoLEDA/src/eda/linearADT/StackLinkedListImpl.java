@@ -32,46 +32,80 @@ import eda.util.ADTUnderflowException;
  */
 public class StackLinkedListImpl<E> implements Stack<E> {
 
+	@SuppressWarnings("rawtypes")
+	private SingleLinkedListRecursiveImpl array;	
+	
+	public StackLinkedListImpl() {
+		array = new SingleLinkedListRecursiveImpl<E>();
+	}
+	
+	
+	@SuppressWarnings("unchecked")
 	@Override
 	public void push(E element) throws ADTOverflowException {
-		// TODO Auto-generated method stub
+		
+		// tamanho inicial, tamanho atual, tamanho maximo
+
+		if (!full()) {
+			array.insert(element);
+		} else {
+			throw new ADTOverflowException();
+		}
 
 	}
-
+	
+	@SuppressWarnings("unchecked")
 	@Override
 	public E pop() throws ADTUnderflowException {
-		// TODO Auto-generated method stub
-		return null;
+		E elementoRemovido = (E) new Object();
+		
+		if (isEmpty()) {
+			throw new ADTUnderflowException();
+		} else {
+			// remove o ultimo elemento do array
+			elementoRemovido = (E) array.removeLast();
+		}
+		return elementoRemovido;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public E top() {
-		// TODO Auto-generated method stub
-		return null;
+		E top = null;
+		
+		try {
+			top = (E) array.last();
+		} catch (ADTUnderflowException e) {
+			top = null;
+		}
+		
+		return top;
 	}
 
 	@Override
 	public int size() {
-		// TODO Auto-generated method stub
-		return 0;
+		return array.size();
 	}
 
 	@Override
 	public boolean isEmpty() {
-		// TODO Auto-generated method stub
-		return false;
+		return array.isEmpty();
 	}
 
 	@Override
 	public boolean full() {
-		// TODO Auto-generated method stub
-		return false;
+		return array.full();
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public E[] toArray() {
-		// TODO Auto-generated method stub
-		return null;
+		return (E[]) array.toArray();
 	}
-
+	
+	@Override
+	public String toString(){
+		return array.toString();		
+	}
+	
 }

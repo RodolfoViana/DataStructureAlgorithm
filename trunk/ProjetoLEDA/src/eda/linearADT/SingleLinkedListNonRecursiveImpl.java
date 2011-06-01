@@ -9,7 +9,9 @@ import eda.util.ADTOverflowException;
  */
 class SingleLinkedListNode<E>{
 	
+	private Object element;
 	private SingleLinkedListNode next;
+	private SingleLinkedListNode before;
 	private E value;
 	
 	public SingleLinkedListNode(SingleLinkedListNode next, E value) {
@@ -18,8 +20,13 @@ class SingleLinkedListNode<E>{
 	}
 	
 	public boolean isEmpty() {
-		// TODO Auto-generated method stub
-		return false;
+		boolean resp = false;
+
+		if (element == null) {
+			resp = true;
+		}
+
+		return resp;
 	}
 	
 	public SingleLinkedListNode getNext() {
@@ -32,6 +39,19 @@ class SingleLinkedListNode<E>{
 	
 	public void setNext(SingleLinkedListNode next) {
 		this.next = next;
+	}
+	
+	
+	public Object getElement() {
+		return element;
+	}
+	
+	public SingleLinkedListNode getBefore() {
+		return before;
+	}
+	
+	public void setBefore(SingleLinkedListNode before) {
+		this.before = before;
 	}
 	
 }
@@ -49,22 +69,19 @@ class SingleLinkedListNode<E>{
  * definidas em eda.util.Constantes para inicializar os valores internos de sua 
  * estrutura. Faca protected qualquer outro metodo auxiliar.
  */
-public class SingleLinkedListNonRecursiveImpl<E extends Comparable<E>> implements LinkedList<E> {
+public class SingleLinkedListNonRecursiveImpl<E> implements LinkedList<E> {
 	
-	private SingleLinkedListNode<E> head;
-	private SingleLinkedListNode<E> next;
+	private SingleLinkedListNode head;
+	private SingleLinkedListNode tail;
 	private int size;
 
 	public SingleLinkedListNonRecursiveImpl() {
-		head=null;
-		next=null;
 		size=0;
 	}
 	
 	@Override
 	public boolean isEmpty() {
-		boolean resp = head==null;
-		return resp;
+		return size() == 0;
 	}
 
 
@@ -85,57 +102,107 @@ public class SingleLinkedListNonRecursiveImpl<E extends Comparable<E>> implement
 		return size;
 	}
 
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	public void insert(E element) throws ADTOverflowException {
-		if (!full()) {
-			next.setNext(new SingleLinkedListNode<E>(null, element));
-			next=next.getNext();
+		
+		if (isEmpty()) {
+			tail = head = new SingleLinkedListNode(null, element);
 			size++;
+		} else {
+			if (!full()) {
+				SingleLinkedListNode aux = head;
+				
+				for (int i = 0; i < size()-1; i++) {
+					aux = aux.getNext();
+				}	
+				SingleLinkedListNode newNo = new SingleLinkedListNode(null, element);
+				aux.setNext(newNo);
+				size++;
+			} else {
+				throw new ADTOverflowException();
+			}
 		}
 	}
-
-	@SuppressWarnings("unchecked")
+	
+	
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	public int search(E element) throws ADTNoSuchElement {
 		
-		if (head==null) throw new ADTNoSuchElement();
-		
-		SingleLinkedListNode<E> it = head;
-		int count = 0;
-		
-		while (it.getNext()!=null) {
-			if (it.getValue().equals(element)) {
-				return count;
+		SingleLinkedListNode elementohead = head;
+		SingleLinkedListNode resp = null;
+
+		for (int i = 0; i < size() / 2; i++) {
+			if (elementohead.getValue() == element) {
+				resp = elementohead;
+				break;
 			}
-			it=it.getNext();
-			count++;
+
+			else {
+				elementohead = elementohead.getNext();
+			}
 		}
-		
-		return -1;
+
+		if (resp == null) {
+			throw new ADTNoSuchElement();
+		}
+
+		return (Integer) resp.getValue();
 	}
-	
 
 	@SuppressWarnings("unchecked")
 	@Override
 	public void remove(E element) {
-		try {
-			int position = search(element);
-			
-			SingleLinkedListNode<E> it = head;
-			int count = 0;
-			
-			while (it.getNext()!=null) {
-				if (count==position) {
-					it.setNext(it.getNext());
-				}
-				it=it.getNext();
-				count++;
-			}
+		
+		SingleLinkedListNode elementoHead = head;
+		SingleLinkedListNode elementoTail = tail;
+		boolean hasElement = false;
+
+		if (size() == 1) {
+			head = tail = new SingleLinkedListNode(null, element);
 			size--;
-		} catch (ADTNoSuchElement e) {
-			return;
+		} else {
+
+			for (int i = 0; i < (size() / 2) + 1; i++) {
+				if (elementoHead.getValue() == element) {
+					hasElement = true;					
+					if (elementoHead.getValue() == head.getValue()){
+						elementoHead.getNext().setBefore(null);
+						head = elementoHead.getNext();						
+						}
+					size--;
+					break;
+			}			
+				if (elementoTail.getValue() == element) {
+					hasElement = true;
+					elementoTail.getBefore().setNext(elementoTail.getNext());
+					size--;
+					break;
+				} else {
+					elementoHead = elementoHead.getNext();
+					elementoTail = elementoTail.getBefore();
+				}
+			}
 		}
+		
+//		try {
+//			int position = search(element);
+//			
+//			SingleLinkedListNode<E> it = head;
+//			int count = 0;
+//			
+//			while (it.getNext()!=null) {
+//				if (count==position) {
+//					it.setNext(it.getNext());
+//				}
+//				it=it.getNext();
+//				count++;
+//			}
+//			size--;
+//		} catch (ADTNoSuchElement e) {
+//			return;
+//		}
 	}
 
 	@Override
@@ -154,63 +221,62 @@ public class SingleLinkedListNonRecursiveImpl<E extends Comparable<E>> implement
 		return result;
 	}
 
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	public int maximum() {
-		if (head==null) return -1;
-		SingleLinkedListNode<E> it = head;
-		SingleLinkedListNode<E> max = head;
-		
-		while (it.getNext()!=null) {
-			if (max.getValue().compareTo(it.getValue())<0) {
-				max=it;
+		E resp = null;
+
+		SingleLinkedListNode aux = head;
+
+		for (int i = 0; i < size(); i++) {
+			if (resp == null) {
+				resp = (E) aux.getValue();
+			} else {
+				if ((Integer) resp < (Integer) aux.getValue()) {
+					resp = (E) aux.getValue();
+				}
 			}
-			it=it.getNext();
+			aux = (SingleLinkedListNode) aux.getNext();
 		}
-		
-		try {
-			return search(max.getValue());
-		} catch (ADTNoSuchElement e) {
-			return -1;
-		}
+
+		return (Integer) resp;
 	}
 
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	public int minimum() {
-		if (head==null) return -1;
-		SingleLinkedListNode<E> it = head;
-		SingleLinkedListNode<E> min = head;
-		
-		while (it.getNext()!=null) {
-			if (min.getValue().compareTo(it.getValue())>0) {
-				min=it;
+		E resp = null;
+
+		@SuppressWarnings("rawtypes")
+		SingleLinkedListNode aux = head;
+
+		for (int i = 0; i < size(); i++) {
+			if (resp == null) {
+				resp = (E) aux.getValue();
+			} else {
+				if ((Integer) resp > (Integer) aux.getValue()) {
+					resp = (E) aux.getValue();
+				}
 			}
-			it=it.getNext();
+			aux = (SingleLinkedListNode) aux.getNext();
 		}
-		
-		try {
-			return search(min.getValue());
-		} catch (ADTNoSuchElement e) {
-			return -1;
-		}
+
+		return (Integer) resp;
 	}
 	
 	@SuppressWarnings("unchecked")
 	@Override
 	public E[] toArray(){
-		Object[] result = new Object[size];
-		
-		SingleLinkedListNode<E> it = head;
-		int count = 0;
-		
-		while (it.getNext()!=null) {
-			result[count]=it.getValue();
-			it=it.getNext();
-			count++;
+		E[] resp = (E[]) new Object[size()];
+
+		SingleLinkedListNode aux = head;
+
+		for (int i = 0; i < size(); i++) {
+			resp[i] = (E) aux.getValue();
+			aux = (SingleLinkedListNode) aux.getNext();
 		}
-		
-		return (E[]) result;
+
+		return resp;		
 	}
 	
 	
@@ -229,6 +295,24 @@ public class SingleLinkedListNonRecursiveImpl<E extends Comparable<E>> implement
 			count++;
 		}
 		return null;
+	}
+	
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	@Override
+	public String toString() {
+		String resp = "{";
+
+		SingleLinkedListNode aux = head;
+
+		for (int i = 0; i < size(); i++) {
+			resp = resp + ((E) aux.getValue()).toString() + ",";
+			aux = (SingleLinkedListNode) aux.getNext();
+		}
+
+		resp = resp + "}";
+		resp = resp.replaceFirst(",}", "}");
+		
+		return resp;
 	}
 
 }
