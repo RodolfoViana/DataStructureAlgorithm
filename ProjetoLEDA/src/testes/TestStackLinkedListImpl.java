@@ -16,12 +16,13 @@ public class TestStackLinkedListImpl {
 	@Before public void construtor(){
 		pilha = new StackLinkedListImpl<Integer>();
 	}
-	
+
 	@Test public void push() throws ADTOverflowException{
 		Assert.assertTrue("Erro no isEmpty", pilha.isEmpty());
 		pilha.push(10);
 		Assert.assertEquals("Erro no size", 1, pilha.size());
 		Assert.assertEquals("Erro no toString", "{10}", pilha.toString());
+		
 		pilha.push(12);
 		Assert.assertEquals("Erro no size", 2, pilha.size());
 		Assert.assertEquals("Erro no toString", "{10,12}", pilha.toString());
@@ -116,7 +117,7 @@ public class TestStackLinkedListImpl {
 	
 		Assert.assertFalse(pilha.full());
 		pilha.push(100);
-		
+	
 		
 		try {
 			Assert.assertTrue(pilha.full());
