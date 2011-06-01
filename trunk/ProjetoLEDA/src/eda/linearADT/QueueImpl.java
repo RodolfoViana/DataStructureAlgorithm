@@ -37,7 +37,7 @@ public class QueueImpl<E> implements Queue<E> {
 	private int index;
 	private E[] array;
 	private int tamanhoInicial;
-	private int tamanhoAtual;
+//	private int tamanhoAtual;
 	private int tamanhoMaximo;
 	private final int FATOR = Constants.INCREASING_FACTOR;
 
@@ -49,7 +49,7 @@ public class QueueImpl<E> implements Queue<E> {
 		tamanhoInicial = Constants.INITIAL_SIZE_OF_STRUCTURE;
 		tamanhoMaximo = Constants.MAX_SIZE_OF_STRUCTURE;
 		array = (E[]) new Object[tamanhoInicial];
-		tamanhoAtual = array.length;
+//		tamanhoAtual = array.length;
 	}
 	
 	/**
@@ -70,7 +70,7 @@ public class QueueImpl<E> implements Queue<E> {
 			throw new ADTOverflowException();
 		}
 	}
-
+	
 	/**
 	 * Metodo que remove o elemento da fila e retorna o proximo elemento
 	 * subsequente, seguindo a politica FIFO.
@@ -152,12 +152,12 @@ public class QueueImpl<E> implements Queue<E> {
 	/**
 	 * Metodo que desloca para a fila para a esquerda em um elemento
 	 */
-	protected void shiftLeft() {
-		for (int i = 0; i <= counter(); i++) {
-			array[i] = array[i + 1];
-		}
-		index--;
-	}
+//	protected void shiftLeft() {
+//		for (int i = 0; i <= counter(); i++) {
+//			array[i] = array[i + 1];
+//		}
+//		index--;
+//	}
 
 	/**
 	 * Metodo que proporciona o crescimento da fila utilizando um fator de
@@ -171,7 +171,7 @@ public class QueueImpl<E> implements Queue<E> {
 			E[] array2 = (E[]) new Object[array.length];
 				
 			// joga os elementos do array menor pro maior
-			for (int i = 0; i <= array.length; i++) {
+			for (int i = 0; i <= array.length -1 ; i++) {
 				array2[i] = array[i];
 			}
 			
