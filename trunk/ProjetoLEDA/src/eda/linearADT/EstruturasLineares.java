@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class EstruturasLineares {
 	
-	// 8 ESTRUTURAS - instanciamento
+	// 8 ESTRUTURAS
 	
 	// SINGLE LINKED LIST NON-RECURSIVE
 	private static SingleLinkedListNonRecursiveImpl<Integer> singleLinkedListNonRecursive = new SingleLinkedListNonRecursiveImpl<Integer>();;	
@@ -13,22 +13,22 @@ public class EstruturasLineares {
 	private static SingleLinkedListRecursiveImpl<Integer> singleLinkedListRecursive = new SingleLinkedListRecursiveImpl<Integer>();
 
 	// DOUBLE LINKED LIST NON-RECURSIVE
-	private static DoubleLinkedListNonRecursiveImpl<String> doubleLinkedListNonRecursive = new DoubleLinkedListNonRecursiveImpl<String>();
+	private static DoubleLinkedListNonRecursiveImpl<Integer> doubleLinkedListNonRecursive = new DoubleLinkedListNonRecursiveImpl<Integer>();
 	
 	// DOUBLE LINKED LIST RECURSIVE
-	private static DoubleLinkedListRecursiveImpl<String> doubleLinkedListRecursive = new DoubleLinkedListRecursiveImpl<String>();
+	private static DoubleLinkedListRecursiveImpl<Integer> doubleLinkedListRecursive = new DoubleLinkedListRecursiveImpl<Integer>();
 	
 	// QUEUE
-	private static QueueImpl<String> queue = new QueueImpl<String>();
+	private static QueueImpl<Integer> queue = new QueueImpl<Integer>();
 	
 	// STACK
-	private static StackImpl<String> stack = new StackImpl<String>();
+	private static StackImpl<Integer> stack = new StackImpl<Integer>();
 	
 	// STACK LINKED LIST
-	private static StackLinkedListImpl<String> stackLinkedList = new StackLinkedListImpl<String>();
+	private static StackLinkedListImpl<Integer> stackLinkedList = new StackLinkedListImpl<Integer>();
 	
 	// STACK QUEUE
-	private static StackQueueImpl<String> stackQueue = new StackQueueImpl<String>();
+	private static StackQueueImpl<Integer> stackQueue = new StackQueueImpl<Integer>();
 	
 	
 	static Scanner sc = new Scanner(System.in);
@@ -56,7 +56,7 @@ public class EstruturasLineares {
 	 */
 	public static void menu() {
 		limpaScanner();
-		System.out.println("        ...........:  Menu  :...........\n");
+		System.out.println("\n        ...........:  Menu  :...........\n");
 		System.out.println("Selecione qual estrutura deseja usar: \n");
 		System.out.println
 			   ("1) Lista Simples Nao-Recursiva     5) Fila \n" +
@@ -116,7 +116,7 @@ public class EstruturasLineares {
 	 * PILHA COM LISTAS
 	 */
 	private static void menuPilhaComLista() {
-		System.out.println("\n        ...........:  Pilha Com Lista  :...........\n");
+		System.out.println("\n\n        ...........:  Pilha Com Lista  :...........\n");
 		System.out.println("        O que deseja fazer: \n");
 		System.out.print
 			   ("        1) Inserir Elemento     3) Topo da Estrutura \n" +
@@ -128,8 +128,7 @@ public class EstruturasLineares {
 		
 	}
 	
-	private static void operacoesPilhaComLista(int escolha) {
-		
+	private static void operacoesPilhaComLista(int escolha) {		
 		switch(escolha) {
 		
 		case 1: 
@@ -137,7 +136,7 @@ public class EstruturasLineares {
 			try {
 				System.out.print("\n        Elemento a ser inserido: ");
 				int elemento = sc.nextInt();
-				// stackLinkedList.push(elemento);
+				stackLinkedList.push(elemento);
 				menuPilha();	
 			} catch (Exception e) {
 				menuPilha();
@@ -145,7 +144,7 @@ public class EstruturasLineares {
 			
 		case 2:
 			try { // retorna o elemento removido
-				System.out.print("\n        Elemento Removido: "); // + stackLinkedList.pop() ");
+				System.out.print("\n        Elemento Removido: " + stackLinkedList.pop());
 				menuPilha();
 			} catch (Exception e) {
 				menuPilha();
@@ -153,14 +152,15 @@ public class EstruturasLineares {
 			
 		case 3:
 			try { // retorna o topo da pilha
-				System.out.print("        O topo da Pilha eh: "); // stackLinkedList.top(); ");
+				System.out.print("        O topo da Pilha eh: " + stackLinkedList.top()); //  ");
 				menuPilha();
 			} catch (Exception e) {
 				menuPilha();	
 			}
 			
 		case 4: // informacoes presentes na estrutura
-		     stackLinkedList.toString();
+			 System.out.println("\n        " + stackLinkedList.toString());
+		     
 			menuPilha();
 			
 		case 5:
@@ -178,7 +178,7 @@ public class EstruturasLineares {
 	 */
 	private static void menuPilhaComFilas() {
 
-		System.out.println("\n        ...........:  Pilha Com Filas  :...........\n");
+		System.out.println("\n\n        ...........:  Pilha Com Filas  :...........\n");
 		System.out.println("        O que deseja fazer: \n");
 		System.out.print
 			   ("        1) Inserir Elemento     3) Topo da Estrutura \n" +
@@ -198,7 +198,7 @@ public class EstruturasLineares {
 			try {
 				System.out.print("\n        Elemento a ser inserido: ");
 				int elemento = sc.nextInt();
-				// stackQueue.push(elemento);
+				stackQueue.push(elemento);
 				menuPilha();	
 			} catch (Exception e) {
 				menuPilha();
@@ -206,7 +206,7 @@ public class EstruturasLineares {
 			
 		case 2:
 			try {
-				System.out.print("\n        Elemento Removido: "); // + stackQueue.pop();
+				System.out.print("\n        Elemento Removido: " + stackQueue.pop());
 				menuPilha();
 			} catch (Exception e) {
 				menuPilha();
@@ -221,7 +221,7 @@ public class EstruturasLineares {
 			}
 			
 		case 4:
-			 stackQueue.toString();
+			 System.out.println("\n        " + stackQueue.toString());
 			menuPilha();
 			
 		case 5:
@@ -238,7 +238,7 @@ public class EstruturasLineares {
 	 */
 	private static void menuPilha() {
 
-		System.out.println("\n        ...........:  Pilha  :...........\n");
+		System.out.println("\n\n        ...........:  Pilha  :...........\n");
 		System.out.println("        O que deseja fazer: \n");
 		System.out.print
 			   ("        1) Inserir Elemento     3) Topo da Estrutura \n" +
@@ -257,7 +257,7 @@ public class EstruturasLineares {
 			try {
 				System.out.print("\n        Elemento a ser inserido: ");
 				int elemento = sc.nextInt();
-				// stack.push(elemento);
+				stack.push(elemento);
 				menuPilha();	
 			} catch (Exception e) {
 				menuPilha();
@@ -265,7 +265,7 @@ public class EstruturasLineares {
 			
 		case 2:
 			try {
-				System.out.print("\n        Elemento Removido: "); // + stack.pop()
+				System.out.print("\n        Elemento Removido: " + stack.pop()); 
 				menuPilha();
 			} catch (Exception e) {
 				menuPilha();
@@ -273,14 +273,14 @@ public class EstruturasLineares {
 			
 		case 3:
 			try {
-				System.out.print("        O topo da Pilha eh: ");  stack.top();
+				System.out.print("\n        O topo da Pilha eh: " + stack.top());  
 				menuPilha();
 			} catch (Exception e) {
 				menuPilha();	
 			}
 			
 		case 4:
-			 stack.toString();
+			 System.out.println("\n        " + stack.toString());
 			menuPilha();
 			
 		case 5:
@@ -293,12 +293,12 @@ public class EstruturasLineares {
 	
 	
 	/**
-	 * FILA
+	 * FILA ok
 	 */
 	private static void menuFila() {
 
 		
-		System.out.println("\n        ...........:  Fila  :...........\n");
+		System.out.println("\n\n        ...........:  Fila  :...........\n");
 		System.out.println("        O que deseja fazer: \n");
 		System.out.print
 			   ("        1) Inserir Elemento     3) Cabeca da Estrutura \n" +
@@ -318,7 +318,7 @@ public class EstruturasLineares {
 				limpaScanner();
 				System.out.print("\n        Elemento a ser inserido: ");
 				int elemento = sc.nextInt();
-				// queue.push(elemento);
+				queue.enqueue(elemento);
 				menuFila();	
 			} catch (Exception e) {
 				menuFila();
@@ -326,7 +326,7 @@ public class EstruturasLineares {
 			
 		case 2:
 			try {
-				System.out.print("\n        Elemento Removido: "); // + queue.dequeue();
+				System.out.print("\n        Elemento Removido: " + queue.dequeue());
 				menuFila();	
 			} catch (Exception e) {
 				menuFila();
@@ -334,14 +334,14 @@ public class EstruturasLineares {
 			
 		case 3:
 			try {
-				System.out.print("\n        O Topo da Estrutura eh: "); // + queue.top();
+				System.out.print("\n        O Topo da Estrutura eh: " + queue.head());
 				menuFila();
 			} catch (Exception e) {
 				menuFila();	
 			}
 			
 		case 4:
-			 queue.toString();
+			System.out.println("\n        " + queue.toString());
 			menuFila();
 			
 		case 5:
@@ -358,7 +358,7 @@ public class EstruturasLineares {
 	 *  LISTA DUPLA RECURSIVA
 	 */
 	private static void menuListaDuplaR() {
-		System.out.println("\n        ...........:  Lista Dupla Recursiva  :...........\n");
+		System.out.println("\n\n        ...........:  Lista Dupla Recursiva  :...........\n");
 		System.out.println("        O que deseja fazer: \n");
 		System.out.print
 			   ("        1) Inserir                       6) Remover Elemento Da Cabeca \n" +
@@ -381,7 +381,7 @@ public class EstruturasLineares {
 				limpaScanner();
 				System.out.print("\n        Elemento a ser inserido: ");
 				int elemento = sc.nextInt();
-				// doubleLinkedListRecursive.insert(elemento);
+				doubleLinkedListRecursive.insert(elemento);
 				menuListaDuplaN();	
 			} catch (Exception e) {
 				menuListaDuplaN();
@@ -392,7 +392,7 @@ public class EstruturasLineares {
 				limpaScanner();
 				System.out.print("\n        Elemento a ser Removido: ");
 				int removido = sc.nextInt();
-				// doubleLinkedListRecursive.remove(removido);				
+				doubleLinkedListRecursive.remove(removido);		
 				menuListaDuplaN();
 			} catch (Exception e) {
 				menuListaDuplaN();
@@ -439,8 +439,8 @@ public class EstruturasLineares {
 			
 		case 7: // MINIMO E MAXIMO
 			try {
-				System.out.println("Elemento Minimo: "); // + doubleLinkedListRecursive.minimum();
-				System.out.println("Elemento Maximo: ");  // + doubleLinkedListRecursive.maximum();
+				System.out.print("\n        Elemento Minimo: " + doubleLinkedListRecursive.minimum()); // + 
+				System.out.println("\n        Elemento Maximo: " + doubleLinkedListRecursive.maximum());
 				menuListaDuplaN();
 			} catch (Exception e) {
 				menuListaDuplaN();
@@ -451,14 +451,14 @@ public class EstruturasLineares {
 				limpaScanner();
 				System.out.print("\n        Elemento a ser pesquisado: ");
 				int elemento = sc.nextInt();
-				// doubleLinkedListRecursive.search();
+				System.out.println("\n        " + doubleLinkedListRecursive.search(elemento));
 				menuListaDuplaN();
 			} catch (Exception e) {
 				menuListaDuplaN();
 			}
 			
 		case 9:
-			doubleLinkedListRecursive.toString();
+			System.out.println("\n        " + doubleLinkedListRecursive.toString());
 			menuListaDuplaN();
 			
 		case 10:
@@ -474,7 +474,7 @@ public class EstruturasLineares {
 	 * LISTA DUPLA NAO RECURSIVA
 	 */
 	private static void menuListaDuplaN() {
-		System.out.println("\n        ...........:  Lista Dupla Nao-Recursiva  :...........\n");
+		System.out.println("\n\n        ...........:  Lista Dupla Nao-Recursiva  :...........\n");
 		System.out.println("        O que deseja fazer: \n");
 		System.out.print
 			   ("        1) Inserir                       6) Remover Elemento Da Cabeca \n" +
@@ -497,7 +497,7 @@ public class EstruturasLineares {
 				limpaScanner();
 				System.out.print("\n        Elemento a ser inserido: ");
 				int elemento = sc.nextInt();
-				// doubleLinkedListNonRecursive.insert(elemento);
+				doubleLinkedListNonRecursive.insert(elemento);
 				menuListaDuplaN();	
 			} catch (Exception e) {
 				menuListaDuplaN();
@@ -508,7 +508,7 @@ public class EstruturasLineares {
 				limpaScanner();
 				System.out.print("\n        Elemento a ser Removido: ");
 				int removido = sc.nextInt();
-				// doubleLinkedListNonRecursive.remove(removido);				
+				doubleLinkedListNonRecursive.remove(removido);				
 				menuListaDuplaN();
 			} catch (Exception e) {
 				menuListaDuplaN();
@@ -518,8 +518,8 @@ public class EstruturasLineares {
 			try {
 				limpaScanner();
 				System.out.print("\n        Elemento a ser inserido: ");
-				int elemento = sc.nextInt();
-				doubleLinkedListNonRecursive.addFirst(elemento);
+				int inserido = sc.nextInt();
+				doubleLinkedListNonRecursive.addFirst(inserido);
 				menuListaDuplaN();	
 			} catch (Exception e) {
 				menuListaDuplaN();
@@ -529,8 +529,8 @@ public class EstruturasLineares {
 			try {
 				limpaScanner();
 				System.out.print("\n        Elemento a ser inserido: ");
-				int elemento = sc.nextInt();
-				doubleLinkedListNonRecursive.addLast(elemento);
+				int inserido = sc.nextInt();
+				doubleLinkedListNonRecursive.addLast(inserido);
 				menuListaDuplaN();	
 			} catch (Exception e) {
 				menuListaDuplaN();
@@ -538,7 +538,7 @@ public class EstruturasLineares {
 			
 		case 5: // REMOVER ELEMENTO DA CALDA
 			try {
-				// doubleLinkedListNonRecursive.removeLast();				
+				doubleLinkedListNonRecursive.removeLast();				
 				menuListaDuplaN();
 			} catch (Exception e) {
 				menuListaDuplaN();
@@ -554,8 +554,8 @@ public class EstruturasLineares {
 			
 		case 7: // MINIMO E MAXIMO
 			try {
-				System.out.println("Elemento Minimo: "); // + doubleLinkedListNonRecursive.minimum();
-				System.out.println("Elemento Maximo: ");  // + doubleLinkedListNonRecursive.maximum();
+				System.out.print("\n        Elemento Minimo: " + doubleLinkedListNonRecursive.minimum());
+				System.out.println("\n        Elemento Maximo: " + doubleLinkedListNonRecursive.maximum());
 				menuListaDuplaN();
 			} catch (Exception e) {
 				menuListaDuplaN();
@@ -566,13 +566,13 @@ public class EstruturasLineares {
 				limpaScanner();
 				System.out.print("\n        Elemento a ser pesquisado: ");
 				int elemento = sc.nextInt();
-				// doubleLinkedListNonRecursive.search();
+				System.out.println(doubleLinkedListNonRecursive.search(elemento));
 				menuListaDuplaN();
 			} catch (Exception e) {
 				menuListaDuplaN();
 			}
 		case 9:
-			doubleLinkedListNonRecursive.toString();
+			System.out.println("\n        " + doubleLinkedListNonRecursive.toString());
 			menuListaDuplaN();
 			
 		case 10:
@@ -588,7 +588,7 @@ public class EstruturasLineares {
 	 * LISTA SIMPLES RECURSIVA
 	 */
 	private static void menuListaSimplesR() {
-		System.out.println("\n        ...........:  Lista Simples Recursiva  :...........\n");
+		System.out.println("\n\n        ...........:  Lista Simples Recursiva  :...........\n");
 		System.out.println("        O que deseja fazer: \n");
 		System.out.print
 			   ("        1) Inserir Elemento     4) Pesquisar Elemento \n" +
@@ -659,10 +659,10 @@ public class EstruturasLineares {
 
 	
 	/**
-	 * LISTA SIMPLES NAO RECURSIVA
+	 * LISTA SIMPLES NAO RECURSIVA ok
 	 */
 	private static void menuListaSimplesN() {
-		System.out.println("\n        ...........:  Lista Simples Nao-Recursiva  :...........\n");
+		System.out.println("\n\n        ...........:  Lista Simples Nao-Recursiva  :...........\n");
 		System.out.println("        O que deseja fazer: \n");
 		System.out.print
 			   ("        1) Inserir Elemento     4) Pesquisar Elemento \n" +
