@@ -39,7 +39,9 @@ public class StackLinkedListImpl<E> implements Stack<E> {
 		array = new SingleLinkedListRecursiveImpl<E>();
 	}
 	
-	
+	/**
+	 * Insere o elemento na pilha.
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public void push(E element) throws ADTOverflowException {
@@ -54,6 +56,9 @@ public class StackLinkedListImpl<E> implements Stack<E> {
 
 	}
 	
+	/**
+	 * Remove o elemento da pilha.
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public E pop() throws ADTUnderflowException {
@@ -68,6 +73,9 @@ public class StackLinkedListImpl<E> implements Stack<E> {
 		return elementoRemovido;
 	}
 
+	/**
+	 * Retorna o elemento que esta no topo da pilha.
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public E top() {
@@ -82,27 +90,42 @@ public class StackLinkedListImpl<E> implements Stack<E> {
 		return top;
 	}
 
+	/**
+	 * Retorna o tamanho da pilha.
+	 */
 	@Override
 	public int size() {
 		return array.size();
 	}
 
+	/**
+	 * Verifica se a pilha esta vazia.
+	 */
 	@Override
 	public boolean isEmpty() {
 		return array.isEmpty();
 	}
 
+	/**
+	 * Verifica se a pilha esta cheia.
+	 */
 	@Override
 	public boolean full() {
 		return array.full();
 	}
 
+	/**
+	 * toArray
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public E[] toArray() {
 		return (E[]) array.toArray();
 	}
 	
+	/**
+	 * toString
+	 */
 	@Override
 	public String toString(){
 		return array.toString();		
