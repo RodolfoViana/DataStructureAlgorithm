@@ -5,6 +5,21 @@ import eda.util.ADTOverflowException;
 import eda.util.ADTUnderflowException;
 
 /**
+ * Universidade Federal de Campina Grande
+ * Projetos de Laboratorio de Estrutura de Dados
+ * 
+ * Equipe:  Layse Sobreira
+ * 			Renan Pinto
+ * 			Rodolfo Viana
+ * 			Talita Lobo
+
+ * 
+ * 	Implementacao das Estruturas Lineares
+ * 		Lista Dupla, Lista Simples, Fila e Pilha
+ *          Implementacao da Lista Duplamente Ligada Recursiva
+ */
+
+/**
  * Estrutura representa uma lista dupla implementada de forma recursiva. Ela
  * representa um no da lista que deve er ligado a outros e todos os metodos
  * devem ser definidos nessa classe, de forma recursiva dentro de cada no, como
@@ -25,6 +40,9 @@ public class DoubleLinkedListRecursiveImpl<E> implements DoubleLinkedList<E> {
 	private DoubleLinkedList<E> next;
 	private DoubleLinkedList<E> before;
 
+	/**
+	 * Verifica se a(s) lista(s) esta(ao) vazia(s).
+	 */
 	@Override
 	public boolean isEmpty() {
 		boolean resp = false;
@@ -32,6 +50,9 @@ public class DoubleLinkedListRecursiveImpl<E> implements DoubleLinkedList<E> {
 		return resp;
 	}
 
+	/**
+	 * Verifica se a(s) lista(s) esta(ao) cheia(s).
+	 */
 	@Override
 	public boolean full() {
 
@@ -43,6 +64,9 @@ public class DoubleLinkedListRecursiveImpl<E> implements DoubleLinkedList<E> {
 		return resp;
 	}
 
+	/**
+	 * Verifica o tamanho da(s) lista(s).
+	 */
 	@Override
 	public int size() {
 		int size = 0;
@@ -52,6 +76,9 @@ public class DoubleLinkedListRecursiveImpl<E> implements DoubleLinkedList<E> {
 		return size;
 	}
 
+	/**
+	 * Insere o elemento na(s) lista(s).
+	 */
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	public void insert(E element) throws ADTOverflowException {
@@ -70,6 +97,9 @@ public class DoubleLinkedListRecursiveImpl<E> implements DoubleLinkedList<E> {
 		}
 	}
 
+	/**
+	 * Procura o elemento na(s) lista(s).
+	 */
 	@Override
 	public int search(E element) throws ADTNoSuchElement {
 		int retorno = -1;
@@ -86,6 +116,9 @@ public class DoubleLinkedListRecursiveImpl<E> implements DoubleLinkedList<E> {
 		return retorno;
 	}
 
+	/**
+	 * Remove o elemento da(s) lista(s).
+	 */
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override
 	public void remove(E element) {
@@ -102,6 +135,9 @@ public class DoubleLinkedListRecursiveImpl<E> implements DoubleLinkedList<E> {
 		}
 	}
 
+	/**
+	 * Reverte um elemento na(s) lista(s).
+	 */
 	@Override
 	public LinkedList<E> revert() {
 		DoubleLinkedListRecursiveImpl<E> resp = new DoubleLinkedListRecursiveImpl<E>();
@@ -118,6 +154,9 @@ public class DoubleLinkedListRecursiveImpl<E> implements DoubleLinkedList<E> {
 		return resp;
 	}
 
+	/**
+	 * Retorna o maior elemento da(s) lista(s).
+	 */
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override
 	public int maximum() {
@@ -139,6 +178,9 @@ public class DoubleLinkedListRecursiveImpl<E> implements DoubleLinkedList<E> {
 		return (Integer) resp;
 	}
 
+	/**
+	 * Retorna o menor elemento da(s) lista(s).
+	 */
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override
 	public int minimum() {
@@ -161,6 +203,9 @@ public class DoubleLinkedListRecursiveImpl<E> implements DoubleLinkedList<E> {
 
 	}
 
+	/**
+	 * Verifica se o elemento eh a cabeca.
+	 */
 	@Override
 	public boolean isHead() {
 
@@ -169,6 +214,9 @@ public class DoubleLinkedListRecursiveImpl<E> implements DoubleLinkedList<E> {
 		return resp;
 	}
 
+	/**
+	 * Adiciona primeiro o elemento a lista.
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public DoubleLinkedList<E> addFirst(int numero) throws ADTOverflowException {
@@ -192,6 +240,9 @@ public class DoubleLinkedListRecursiveImpl<E> implements DoubleLinkedList<E> {
 
 	}
 
+	/**
+	 * Adiciona no fim o elemento na lista.
+	 */
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	public void addLast(int numero) throws ADTOverflowException {
@@ -212,6 +263,9 @@ public class DoubleLinkedListRecursiveImpl<E> implements DoubleLinkedList<E> {
 		}
 	}
 
+	/**
+	 * Remove primeiro o elemento na lista.
+	 */
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override
 	public void removeFirst() throws ADTUnderflowException {
@@ -229,6 +283,9 @@ public class DoubleLinkedListRecursiveImpl<E> implements DoubleLinkedList<E> {
 		}
 	}
 
+	/**
+	 * Remove por ultimo o elemento da lista.
+	 */
 	@Override
 	public void removeLast() throws ADTUnderflowException {
 
@@ -242,6 +299,9 @@ public class DoubleLinkedListRecursiveImpl<E> implements DoubleLinkedList<E> {
 		}
 	}
 
+	/**
+	 * Retorna o toArray da LinkedList
+	 */
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override
 	public E[] toArray() {
@@ -258,6 +318,9 @@ public class DoubleLinkedListRecursiveImpl<E> implements DoubleLinkedList<E> {
 		return resp;
 	}
 
+	/**
+	 * metodo equals.
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		boolean resp = false;
@@ -286,6 +349,9 @@ public class DoubleLinkedListRecursiveImpl<E> implements DoubleLinkedList<E> {
 		return resp;
 	}
 
+	/**
+	 * toString
+	 */
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override
 	public String toString() {
