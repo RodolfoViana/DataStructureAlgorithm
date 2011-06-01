@@ -49,12 +49,10 @@ public class StackQueueImpl<E> implements Stack<E> {
 	/**
 	 * Construtor de uma pilha usando duas filas.
 	 */
-	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public StackQueueImpl() {
 		tamanhoMaximo = Constants.MAX_SIZE_OF_STRUCTURE;
-		
-		queue = (Queue) new Object();
-		queue2 = (Queue) new Object();
+		queue = new QueueImpl<Object>();
+		queue2 = new QueueImpl<Object>();
 	}
 	
 	/**

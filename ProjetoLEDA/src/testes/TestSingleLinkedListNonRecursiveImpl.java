@@ -1,6 +1,6 @@
 package testes;
 
-import java.util.concurrent.ExecutionException;
+
 
 import org.junit.Assert;
 import org.junit.Before;
@@ -9,7 +9,6 @@ import org.junit.Test;
 import eda.linearADT.SingleLinkedListNonRecursiveImpl;
 import eda.util.ADTNoSuchElement;
 import eda.util.ADTOverflowException;
-import eda.util.ADTUnderflowException;
 
 public class TestSingleLinkedListNonRecursiveImpl {
 	

@@ -62,9 +62,9 @@ public class QueueImpl<E> implements Queue<E> {
 		if (!full()) {
 			if (counter() == array.length -1 || counter() == array.length) {
 				aumentaTamanhoFila();
-				array[++index] = element;
+				array[index++] = element;
 			} else { 
-				array[++index] = element;
+				array[index++] = element;
 			}
 		} else {
 			throw new ADTOverflowException();
