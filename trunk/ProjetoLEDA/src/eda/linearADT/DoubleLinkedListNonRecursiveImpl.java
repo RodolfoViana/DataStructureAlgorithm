@@ -29,9 +29,6 @@ class DoubleLinkedListNode {
 	}
 
 	public Object getElement() {
-		
-		
-		//teste
 		return element;
 	}
 

@@ -11,22 +11,10 @@ class SingleLinkedListNode<E>{
 	
 	@SuppressWarnings("rawtypes")
 	private SingleLinkedListNode next;
-	@SuppressWarnings("rawtypes")
-//	private SingleLinkedListNode before;
 	private E value;
 	
 	public SingleLinkedListNode(E value) {
 		this.value=value;
-	}
-	
-	public boolean isEmpty() {
-		boolean resp = false;
-
-		if (value == null) {
-			resp = true;
-		}
-
-		return resp;
 	}
 	
 	@SuppressWarnings("rawtypes")
@@ -42,18 +30,6 @@ class SingleLinkedListNode<E>{
 	public void setNext(SingleLinkedListNode next) {
 		this.next = next;
 	}
-	
-	
-//	@SuppressWarnings("rawtypes")
-//	public SingleLinkedListNode getBefore() {
-//		return before;
-//	}
-//	
-//	@SuppressWarnings("rawtypes")
-//	public void setBefore(SingleLinkedListNode before) {
-//		this.before = before;
-//	}
-	
 }
 
 /**
@@ -158,12 +134,10 @@ public class SingleLinkedListNonRecursiveImpl<E> implements LinkedList<E> {
 		return (Integer) resp.getValue();
 	}
 
-	@SuppressWarnings({ "unchecked", "rawtypes" })
+	@SuppressWarnings({ "unchecked", "rawtypes", "unused" })
 	@Override
 	public void remove(E element) {
 		
-//		SingleLinkedListNode elementoHead = head;
-//		SingleLinkedListNode elementoTail = tail;
 		SingleLinkedListNode anterior = null;
 		SingleLinkedListNode atual = head;
 		boolean hasElement = false;
@@ -189,69 +163,43 @@ public class SingleLinkedListNonRecursiveImpl<E> implements LinkedList<E> {
 						anterior.setNext(null);
 						tail = anterior;
 					} else{
-////						elementoHead.getNext().setBefore(null);
-//						head = elementoHead.getNext();						
-//						}
 					anterior.setNext(atual.getNext());
 					}
 					size--;
 					break;
 			}
-				
-//				if (elementoTail.getValue() == element) {
-//					hasElement = true;
-////					elementoTail.getBefore().setNext(elementoTail.getNext());
-//					size--;
-//					break;
-//				} 
 			else {
 					atual = atual.getNext();
 					anterior = anterior.getNext();
-//					elementoTail = elementoTail.getBefore();
 				}
 			}
 		}
 		}
-		
-//		try {
-//			int position = search(element);
-//			
-//			SingleLinkedListNode<E> it = head;
-//			int count = 0;
-//			
-//			while (it.getNext()!=null) {
-//				if (count==position) {
-//					it.setNext(it.getNext());
-//				}
-//				it=it.getNext();
-//				count++;
-//			}
-//			size--;
-//		} catch (ADTNoSuchElement e) {
-//			return;
-//		}
 	}
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override
 	public LinkedList<E> revert() {
 		
+		SingleLinkedListNonRecursiveImpl<E> aux =  this;
 		LinkedList<E> newLinked = new SingleLinkedListNonRecursiveImpl<E>();
-		SingleLinkedListNode newNo = tail;
-		int size = size();
+		SingleLinkedListNode newNo = aux.getTail();
+		int size = aux.size();
 		
 		for (int i = 0; i < size; i++) {
 			try {
-				newNo = tail;
+				newNo = aux.getTail();
 				newLinked.insert((E) newNo.getValue());
-				remove((E) tail.getValue());
-				newNo = tail;
+				aux.remove((E) aux.getTail().getValue());
+				newNo = aux.getTail();
 			} catch (ADTOverflowException e) {
 				e.printStackTrace();
 			}
 		}
 		
-		return newLinked;
+		aux = (SingleLinkedListNonRecursiveImpl<E>) newLinked;
+		
+		return aux;
 		
 	}
 
@@ -297,7 +245,7 @@ public class SingleLinkedListNonRecursiveImpl<E> implements LinkedList<E> {
 		return (Integer) resp;
 	}
 	
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	public E[] toArray(){
 		E[] resp = (E[]) new Object[size()];
@@ -310,24 +258,6 @@ public class SingleLinkedListNonRecursiveImpl<E> implements LinkedList<E> {
 		}
 
 		return resp;		
-	}
-	
-	
-	//metodos auxiliares
-	
-	@SuppressWarnings("unchecked")
-	private SingleLinkedListNode<E> getAtIndex(int index) {
-		SingleLinkedListNode<E> it = head;
-		int count = 0;
-		
-		while (it.getNext()!=null) {
-			if (index==count) {
-				return it;
-			}
-			it=it.getNext();
-			count++;
-		}
-		return null;
 	}
 	
 	@SuppressWarnings({ "unchecked", "rawtypes" })
@@ -347,6 +277,11 @@ public class SingleLinkedListNonRecursiveImpl<E> implements LinkedList<E> {
 		resp = resp.replaceFirst(",}", "}");
 		
 		return resp;
+	}
+
+	@SuppressWarnings("rawtypes")
+	public SingleLinkedListNode getTail() {
+		return tail;
 	}
 
 }

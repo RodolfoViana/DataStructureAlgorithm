@@ -108,10 +108,7 @@ public class TestSingleLinkedListNonRecursiveImpl {
 		Assert.assertEquals("Erro no size", 4, linkedList.size());
 		Assert.assertFalse(linkedList.isEmpty());
 		
-		@SuppressWarnings("unused")
-		SingleLinkedListNonRecursiveImpl<Integer> linkedList2  = (SingleLinkedListNonRecursiveImpl<Integer>) linkedList.revert();
-		
-		Assert.assertEquals("Erro no revert", "{4,30,3,2}", linkedList2.toString());
+		Assert.assertEquals("Erro no revert", "{4,30,3,2}", linkedList.revert().toString());
 	}
 	
 	@Test public void toArray() throws ADTOverflowException {

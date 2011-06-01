@@ -34,7 +34,6 @@ import eda.util.ADTUnderflowException;
 public class SingleLinkedListRecursiveImpl<E> implements LinkedList<E> {
 
 	private E element;
-	private LinkedList<E> head;
 	private LinkedList<E> next;
 
 	/**
@@ -96,7 +95,6 @@ public class SingleLinkedListRecursiveImpl<E> implements LinkedList<E> {
 	/**
 	 * Pesuisa um elemento na lista
 	 */
-	@SuppressWarnings("unchecked")
 	@Override
 	public int search(E element) throws ADTNoSuchElement {
 		int resp = -1;
@@ -227,10 +225,12 @@ public class SingleLinkedListRecursiveImpl<E> implements LinkedList<E> {
 		this.element = element;
 	}
 
+	@SuppressWarnings("rawtypes")
 	public LinkedList getNext() {
 		return next;
 	}
 
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public void setNext(LinkedList next) {
 		this.next = next;
 	}
@@ -276,8 +276,5 @@ public class SingleLinkedListRecursiveImpl<E> implements LinkedList<E> {
 
 		return resp;
 	}
-
-	
-	
 
 }
