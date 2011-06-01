@@ -68,27 +68,52 @@ public class TestStackQueueImpl {
 		Assert.assertEquals("Erro no pop", n4, pilha.top());
 
 	}
-//	
-//	@Test public void toArray() throws ADTOverflowException{
-//		Integer n1 = 10;
-//		Integer n2 = 20;
-//		Integer n3 = 30;
-//		Integer n4 = 40;
-//		
-//		pilha.push(n1);
-//		pilha.push(n2);
-//		pilha.push(n3);
-//		pilha.push(n4);
-//		
-//		Integer[] array = new Integer[4];
-//		array[0] = n1;
-//		array[1] = n2;
-//		array[2] = n3;
-//		array[3] = n4;
-//		
-//		Assert.assertArrayEquals("erro no toArray", array, pilha.toArray());
-//		
-//	}
 	
-
+	@Test public void toArray() throws ADTOverflowException{
+		Assert.assertTrue(pilha.isEmpty());
+		
+		Integer n1 = 10;
+		Integer n2 = 20;
+		Integer n3 = 30;
+		Integer n4 = 40;
+		
+		pilha.push(n1);
+		pilha.push(n2);
+		pilha.push(n3);
+		pilha.push(n4);
+		
+		Integer[] array = new Integer[30];
+		array[0] = n1;
+		array[1] = n2;
+		array[2] = n3;
+		array[3] = n4;
+		
+		Assert.assertArrayEquals("erro no toArray", array, pilha.toArray());
+		
+	}
+	
+	@Test public void full() throws ADTOverflowException{
+		Assert.assertTrue("Erro no isEmpty", pilha.isEmpty());
+		Assert.assertFalse("Erro no full", pilha.full());
+		
+		for (int i = 0; i < 99; i++){
+			pilha.push(i);
+		}
+		Assert.assertFalse("Erro no full", pilha.full());
+		pilha.push(100);
+		Assert.assertTrue("Erro no full", pilha.full());
+		
+	}
+	
+	@Test public void topException() {
+		Assert.assertTrue("Erro no isEmpty", pilha.isEmpty());
+		
+		
+		try {
+			pilha.top();
+		} catch (ADTUnderflowException e) {
+			Assert.assertEquals("Erro no top", "Structure is empty", e.getMessage());
+		}
+	}
+	
 }

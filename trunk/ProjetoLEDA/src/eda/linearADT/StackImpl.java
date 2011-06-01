@@ -68,7 +68,7 @@ public class StackImpl<E> implements Stack<E> {
 			
 			
 			// joga os elementos do array menor pro maior
-			for (int i = 0; i <= array.length; i++) {
+			for (int i = 0; i <= array.length -1; i++) {
 				array2[i] = array[i];
 			}
 			
@@ -110,7 +110,7 @@ public class StackImpl<E> implements Stack<E> {
 		// tamanho inicial, tamanho atual, tamanho maximo
 
 		if (!full()) {
-			if (counter() == tamanhoAtual) {
+			if (counter() == tamanhoAtual -1) {
 				aumentaTamanho();
 				// insere o elemento na proxima posicao vazia
 				array[counter() + 1] = element;
