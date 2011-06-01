@@ -43,7 +43,7 @@ public class SingleLinkedListRecursiveImpl<E> implements LinkedList<E> {
 	@Override
 	public boolean isEmpty() {
 		boolean resp = false;
-
+		
 		if (this.next == null) {
 			resp = true;
 		}
@@ -128,7 +128,7 @@ public class SingleLinkedListRecursiveImpl<E> implements LinkedList<E> {
 	}
 
 	/**
-	 * Invertes os elementos da lista
+	 * 
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
@@ -212,29 +212,7 @@ public class SingleLinkedListRecursiveImpl<E> implements LinkedList<E> {
 	}
 
 	// metodos auxiliares
-	
-	public E removeLast() throws ADTUnderflowException {
-		E elementoRemovido = last();
-		remove(elementoRemovido);
-		return elementoRemovido;
-	}
-	
-	@SuppressWarnings({ "rawtypes", "unchecked" })
-	public E last() throws ADTUnderflowException {
-		E elementoRemovido = getElement();
-		
-		if (isEmpty()) {
-			throw new ADTUnderflowException();
-		}
-		if (getNext().isEmpty()) {
-			elementoRemovido = getElement();
-		} else {
-			elementoRemovido = (E) ((SingleLinkedListRecursiveImpl) getNext()).last();
-		}
-		
-		return elementoRemovido;
-	}
-	
+
 	/**
 	 * @return element
 	 */
@@ -258,6 +236,30 @@ public class SingleLinkedListRecursiveImpl<E> implements LinkedList<E> {
 	}
 	
 	@SuppressWarnings({ "rawtypes", "unchecked" })
+	public E last() throws ADTUnderflowException {
+		E elementoRemovido = getElement();
+		
+		if (isEmpty()) {
+			throw new ADTUnderflowException();
+		}
+		if (getNext().isEmpty()) {
+			elementoRemovido = getElement();
+		} else {
+			elementoRemovido = (E) ((SingleLinkedListRecursiveImpl) getNext()).last();
+		}
+		
+		return elementoRemovido;
+	}
+	
+	public E removeLast() throws ADTUnderflowException{
+		
+		E ultimoElemento = last();
+		remove(ultimoElemento);
+		
+		return ultimoElemento;
+	}
+	
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override
 	public String toString() {
 		String resp = "{";
@@ -274,5 +276,8 @@ public class SingleLinkedListRecursiveImpl<E> implements LinkedList<E> {
 
 		return resp;
 	}
+
+	
+	
 
 }
