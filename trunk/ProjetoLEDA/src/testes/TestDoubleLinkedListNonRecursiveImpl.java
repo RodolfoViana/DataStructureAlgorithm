@@ -106,6 +106,8 @@ public class TestDoubleLinkedListNonRecursiveImpl {
 		Assert.assertEquals("Erro no size", 4, linkedList.size());
 		Assert.assertFalse(linkedList.isEmpty());
 		
+		
+		
 		Assert.assertEquals("Erro no revert", "{4,30,3,2}", linkedList.revert().toString());
 	}
 	

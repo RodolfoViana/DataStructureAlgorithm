@@ -133,11 +133,11 @@ public class SingleLinkedListRecursiveImpl<E> implements LinkedList<E> {
 	@SuppressWarnings("unchecked")
 	@Override
 	public LinkedList<E> revert() {
-		SingleLinkedListRecursiveImpl<E> resp = new SingleLinkedListRecursiveImpl<E>();
 		
-		if (!isEmpty()){
+		SingleLinkedListRecursiveImpl<E> resp = new SingleLinkedListRecursiveImpl<E>();
+
+		if (!isEmpty()) {
 			resp = (SingleLinkedListRecursiveImpl<E>) getNext().revert();
-			
 			try {
 				resp.insert(getElement());
 			} catch (ADTOverflowException e) {

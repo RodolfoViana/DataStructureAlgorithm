@@ -9,26 +9,27 @@ import eda.util.ADTOverflowException;
  */
 class SingleLinkedListNode<E>{
 	
-	private Object element;
+	@SuppressWarnings("rawtypes")
 	private SingleLinkedListNode next;
-	private SingleLinkedListNode before;
+	@SuppressWarnings("rawtypes")
+//	private SingleLinkedListNode before;
 	private E value;
 	
-	public SingleLinkedListNode(SingleLinkedListNode next, E value) {
-		this.next=next;
+	public SingleLinkedListNode(E value) {
 		this.value=value;
 	}
 	
 	public boolean isEmpty() {
 		boolean resp = false;
 
-		if (element == null) {
+		if (value == null) {
 			resp = true;
 		}
 
 		return resp;
 	}
 	
+	@SuppressWarnings("rawtypes")
 	public SingleLinkedListNode getNext() {
 		return next;
 	}
@@ -37,22 +38,21 @@ class SingleLinkedListNode<E>{
 		return value;
 	}
 	
+	@SuppressWarnings("rawtypes")
 	public void setNext(SingleLinkedListNode next) {
 		this.next = next;
 	}
 	
 	
-	public Object getElement() {
-		return element;
-	}
-	
-	public SingleLinkedListNode getBefore() {
-		return before;
-	}
-	
-	public void setBefore(SingleLinkedListNode before) {
-		this.before = before;
-	}
+//	@SuppressWarnings("rawtypes")
+//	public SingleLinkedListNode getBefore() {
+//		return before;
+//	}
+//	
+//	@SuppressWarnings("rawtypes")
+//	public void setBefore(SingleLinkedListNode before) {
+//		this.before = before;
+//	}
 	
 }
 
@@ -71,7 +71,9 @@ class SingleLinkedListNode<E>{
  */
 public class SingleLinkedListNonRecursiveImpl<E> implements LinkedList<E> {
 	
+	@SuppressWarnings("rawtypes")
 	private SingleLinkedListNode head;
+	@SuppressWarnings("rawtypes")
 	private SingleLinkedListNode tail;
 	private int size;
 
@@ -107,17 +109,22 @@ public class SingleLinkedListNonRecursiveImpl<E> implements LinkedList<E> {
 	public void insert(E element) throws ADTOverflowException {
 		
 		if (isEmpty()) {
-			tail = head = new SingleLinkedListNode(null, element);
+			tail = head = new SingleLinkedListNode(element);
 			size++;
 		} else {
 			if (!full()) {
-				SingleLinkedListNode aux = head;
 				
-				for (int i = 0; i < size()-1; i++) {
-					aux = aux.getNext();
-				}	
-				SingleLinkedListNode newNo = new SingleLinkedListNode(null, element);
-				aux.setNext(newNo);
+				if (size() == 1){
+					SingleLinkedListNode newNo = new SingleLinkedListNode(element);
+					head.setNext(newNo);
+					tail = newNo;
+				} else {
+					SingleLinkedListNode aux = tail;
+					SingleLinkedListNode newNo = new SingleLinkedListNode(element);
+					aux.setNext(newNo);
+					tail = newNo;
+				}
+				
 				size++;
 			} else {
 				throw new ADTOverflowException();
@@ -126,14 +133,14 @@ public class SingleLinkedListNonRecursiveImpl<E> implements LinkedList<E> {
 	}
 	
 	
-	@SuppressWarnings({ "unchecked", "rawtypes" })
+	@SuppressWarnings({ "rawtypes" })
 	@Override
 	public int search(E element) throws ADTNoSuchElement {
 		
 		SingleLinkedListNode elementohead = head;
 		SingleLinkedListNode resp = null;
 
-		for (int i = 0; i < size() / 2; i++) {
+		for (int i = 0; i < size(); i++) {
 			if (elementohead.getValue() == element) {
 				resp = elementohead;
 				break;
@@ -151,39 +158,59 @@ public class SingleLinkedListNonRecursiveImpl<E> implements LinkedList<E> {
 		return (Integer) resp.getValue();
 	}
 
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	public void remove(E element) {
 		
-		SingleLinkedListNode elementoHead = head;
-		SingleLinkedListNode elementoTail = tail;
+//		SingleLinkedListNode elementoHead = head;
+//		SingleLinkedListNode elementoTail = tail;
+		SingleLinkedListNode anterior = null;
+		SingleLinkedListNode atual = head;
 		boolean hasElement = false;
 
 		if (size() == 1) {
-			head = tail = new SingleLinkedListNode(null, element);
+			head = tail = new SingleLinkedListNode(element);
 			size--;
-		} else {
+		} 
+		else {
+			if (atual.getValue() == element){
+				head = atual.getNext();
+				size--;
+			} else {
+				anterior = head;
+				atual = head.getNext();
+			
 
-			for (int i = 0; i < (size() / 2) + 1; i++) {
-				if (elementoHead.getValue() == element) {
+			for (int i = 0; i < size(); i++) {
+				
+				if (atual.getValue() == element) {
 					hasElement = true;					
-					if (elementoHead.getValue() == head.getValue()){
-						elementoHead.getNext().setBefore(null);
-						head = elementoHead.getNext();						
-						}
+					if (atual.getValue() == tail.getValue()){
+						anterior.setNext(null);
+						tail = anterior;
+					} else{
+////						elementoHead.getNext().setBefore(null);
+//						head = elementoHead.getNext();						
+//						}
+					anterior.setNext(atual.getNext());
+					}
 					size--;
 					break;
-			}			
-				if (elementoTail.getValue() == element) {
-					hasElement = true;
-					elementoTail.getBefore().setNext(elementoTail.getNext());
-					size--;
-					break;
-				} else {
-					elementoHead = elementoHead.getNext();
-					elementoTail = elementoTail.getBefore();
+			}
+				
+//				if (elementoTail.getValue() == element) {
+//					hasElement = true;
+////					elementoTail.getBefore().setNext(elementoTail.getNext());
+//					size--;
+//					break;
+//				} 
+			else {
+					atual = atual.getNext();
+					anterior = anterior.getNext();
+//					elementoTail = elementoTail.getBefore();
 				}
 			}
+		}
 		}
 		
 //		try {
@@ -205,20 +232,27 @@ public class SingleLinkedListNonRecursiveImpl<E> implements LinkedList<E> {
 //		}
 	}
 
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override
 	public LinkedList<E> revert() {
-		int elementNumber = size;
 		
-		LinkedList<E> result = new SingleLinkedListNonRecursiveImpl<E>();
+		LinkedList<E> newLinked = new SingleLinkedListNonRecursiveImpl<E>();
+		SingleLinkedListNode newNo = tail;
+		int size = size();
 		
-		while (elementNumber>=0) {
+		for (int i = 0; i < size; i++) {
 			try {
-				result.insert(getAtIndex(elementNumber).getValue());
-			} catch (ADTOverflowException e) {}
-			elementNumber--;
+				newNo = tail;
+				newLinked.insert((E) newNo.getValue());
+				remove((E) tail.getValue());
+				newNo = tail;
+			} catch (ADTOverflowException e) {
+				e.printStackTrace();
+			}
 		}
 		
-		return result;
+		return newLinked;
+		
 	}
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
@@ -247,7 +281,6 @@ public class SingleLinkedListNonRecursiveImpl<E> implements LinkedList<E> {
 	public int minimum() {
 		E resp = null;
 
-		@SuppressWarnings("rawtypes")
 		SingleLinkedListNode aux = head;
 
 		for (int i = 0; i < size(); i++) {
@@ -304,6 +337,7 @@ public class SingleLinkedListNonRecursiveImpl<E> implements LinkedList<E> {
 
 		SingleLinkedListNode aux = head;
 
+		
 		for (int i = 0; i < size(); i++) {
 			resp = resp + ((E) aux.getValue()).toString() + ",";
 			aux = (SingleLinkedListNode) aux.getNext();
