@@ -52,7 +52,6 @@ public class TestSingleLinkedListRecursiveImpl {
 		
 	}
 	
-	/*
 	@Test public void revert() throws ADTOverflowException{
 		Integer n1 = new Integer(2);
 		Integer n2 = new Integer(3);
@@ -68,8 +67,8 @@ public class TestSingleLinkedListRecursiveImpl {
 		linkedList2.insert(n2);
 		linkedList2.insert(n1);
 				
-		Assert.assertTrue("Revert errado", linkedList2.equals(linkedList.revert()) );
-	}*/
+		Assert.assertEquals("Revert errado", "{4,3,2}", linkedList.revert().toString());
+	}
 	
 	
 }

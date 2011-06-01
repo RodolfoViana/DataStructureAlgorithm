@@ -28,7 +28,10 @@ public class TestSingleLinkedListNonRecursiveImpl {
 		linkedList.insert(10);
 		Assert.assertEquals("Erro no insert", 1, linkedList.size());
 		linkedList.insert(15);
-		Assert.assertEquals("Erro no insert", 2, linkedList.size());		
+		Assert.assertEquals("Erro no insert", 2, linkedList.size());
+		linkedList.insert(20);
+		Assert.assertEquals("Erro no insert", 3, linkedList.size());
+		Assert.assertEquals("Erro no toString", "{10,15,20}", linkedList.toString());
 	}
 	
 	@Test public void minimum() throws ADTOverflowException{
@@ -106,7 +109,10 @@ public class TestSingleLinkedListNonRecursiveImpl {
 		Assert.assertEquals("Erro no size", 4, linkedList.size());
 		Assert.assertFalse(linkedList.isEmpty());
 		
-		Assert.assertEquals("Erro no revert", "{4,30,3,2}", linkedList.revert().toString());
+		@SuppressWarnings("unused")
+		SingleLinkedListNonRecursiveImpl<Integer> linkedList2  = (SingleLinkedListNonRecursiveImpl<Integer>) linkedList.revert();
+		
+		Assert.assertEquals("Erro no revert", "{4,30,3,2}", linkedList2.toString());
 	}
 	
 	@Test public void toArray() throws ADTOverflowException {
