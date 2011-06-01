@@ -7,28 +7,28 @@ public class EstruturasLineares {
 	// 8 ESTRUTURAS - instanciamento
 	
 	// SINGLE LINKED LIST NON-RECURSIVE
-	//private static SingleLinkedListNonRecursiveImpl<String> singleLinkedListNonRecursive;	
+	private static SingleLinkedListNonRecursiveImpl<String> singleLinkedListNonRecursive;	
 	
 	// SINGLE LINKED LIST RECURSIVE
-	//private static SingleLinkedListRecursiveImpl<String> singleLinkedListRecursive = new SingleLinkedListRecursiveImpl<String>();
+	private static SingleLinkedListRecursiveImpl<String> singleLinkedListRecursive = new SingleLinkedListRecursiveImpl<String>();
 
 	// DOUBLE LINKED LIST NON-RECURSIVE
-	//private static DoubleLinkedListNonRecursiveImpl<String> doubleLinkedListNonRecursive = new DoubleLinkedListNonRecursiveImpl<String>();
+	private static DoubleLinkedListNonRecursiveImpl<String> doubleLinkedListNonRecursive = new DoubleLinkedListNonRecursiveImpl<String>();
 	
 	// DOUBLE LINKED LIST RECURSIVE
-	//private static DoubleLinkedListRecursiveImpl<String> doubleLinkedListRecursive = new DoubleLinkedListRecursiveImpl<String>();
+	private static DoubleLinkedListRecursiveImpl<String> doubleLinkedListRecursive = new DoubleLinkedListRecursiveImpl<String>();
 	
 	// QUEUE
-	//private static QueueImpl<String> queue = new QueueImpl<String>();
+	private static QueueImpl<String> queue = new QueueImpl<String>();
 	
 	// STACK
-	//private static StackImpl<String> stack = new StackImpl<String>();
+	private static StackImpl<String> stack = new StackImpl<String>();
 	
 	// STACK LINKED LIST
-	//private static StackLinkedListImpl<String> stackLinkedList = new StackLinkedListImpl<String>();
+	private static StackLinkedListImpl<String> stackLinkedList = new StackLinkedListImpl<String>();
 	
 	// STACK QUEUE
-	//private static StackQueueImpl<String> stackQueue = new StackQueueImpl<String>();
+	private static StackQueueImpl<String> stackQueue = new StackQueueImpl<String>();
 	
 	
 	static Scanner sc = new Scanner(System.in);
@@ -161,7 +161,7 @@ public class EstruturasLineares {
 			}
 			
 		case 4: // informacoes presentes na estrutura
-		    // stackLinkedList.toString();
+		     stackLinkedList.toString();
 			menuPilha();
 			
 		case 5:
@@ -215,14 +215,14 @@ public class EstruturasLineares {
 			
 		case 3:
 			try {
-				System.out.print("        O topo da Pilha eh: "); // stackQueue.top();
+				System.out.print("        O topo da Pilha eh: ");  stackQueue.top();
 				menuPilha();
 			} catch (Exception e) {
 				menuPilha();	
 			}
 			
 		case 4:
-			// stackQueue.toString();
+			 stackQueue.toString();
 			menuPilha();
 			
 		case 5:
@@ -274,14 +274,14 @@ public class EstruturasLineares {
 			
 		case 3:
 			try {
-				System.out.print("        O topo da Pilha eh: "); // stack.top();
+				System.out.print("        O topo da Pilha eh: ");  stack.top();
 				menuPilha();
 			} catch (Exception e) {
 				menuPilha();	
 			}
 			
 		case 4:
-			// stack.toString();
+			 stack.toString();
 			menuPilha();
 			
 		case 5:
@@ -342,7 +342,7 @@ public class EstruturasLineares {
 			}
 			
 		case 4:
-			// queue.toString();
+			 queue.toString();
 			menuFila();
 			
 		case 5:
@@ -404,7 +404,7 @@ public class EstruturasLineares {
 				limpaScanner();
 				System.out.print("\n        Elemento a ser inserido: ");
 				int elemento = sc.nextInt();
-				// doubleLinkedListRecursive.addFirst(elemento);
+				doubleLinkedListRecursive.addFirst(elemento);
 				menuListaDuplaN();	
 			} catch (Exception e) {
 				menuListaDuplaN();
@@ -415,7 +415,7 @@ public class EstruturasLineares {
 				limpaScanner();
 				System.out.print("\n        Elemento a ser inserido: ");
 				int elemento = sc.nextInt();
-				// doubleLinkedListRecursive.addLast(elemento);
+				doubleLinkedListRecursive.addLast(elemento);
 				menuListaDuplaN();	
 			} catch (Exception e) {
 				menuListaDuplaN();
@@ -423,7 +423,7 @@ public class EstruturasLineares {
 			
 		case 5: // REMOVER ELEMENTO DA CALDA
 			try {
-				// doubleLinkedListRecursive.removeLast();				
+				doubleLinkedListRecursive.removeLast();				
 				menuListaDuplaN();
 			} catch (Exception e) {
 				menuListaDuplaN();
@@ -431,7 +431,7 @@ public class EstruturasLineares {
 			
 		case 6: // REMOVER ELEMENTO DA CABECA
 			try {
-				// doubleLinkedListRecursive.removeFirst();
+				doubleLinkedListRecursive.removeFirst();
 				
 				menuListaDuplaN();
 			} catch (Exception e) {
@@ -459,7 +459,7 @@ public class EstruturasLineares {
 			}
 			
 		case 9:
-			// doubleLinkedListRecursive.toString();
+			doubleLinkedListRecursive.toString();
 			menuListaDuplaN();
 			
 		case 10:
@@ -520,7 +520,7 @@ public class EstruturasLineares {
 				limpaScanner();
 				System.out.print("\n        Elemento a ser inserido: ");
 				int elemento = sc.nextInt();
-				// doubleLinkedListNonRecursive.addFirst(elemento);
+				doubleLinkedListNonRecursive.addFirst(elemento);
 				menuListaDuplaN();	
 			} catch (Exception e) {
 				menuListaDuplaN();
@@ -531,7 +531,7 @@ public class EstruturasLineares {
 				limpaScanner();
 				System.out.print("\n        Elemento a ser inserido: ");
 				int elemento = sc.nextInt();
-				// doubleLinkedListNonRecursive.addLast(elemento);
+				doubleLinkedListNonRecursive.addLast(elemento);
 				menuListaDuplaN();	
 			} catch (Exception e) {
 				menuListaDuplaN();
@@ -547,7 +547,7 @@ public class EstruturasLineares {
 			
 		case 6: // REMOVER ELEMENTO DA CABECA
 			try {
-				// doubleLinkedListNonRecursive.removeFirst();
+				doubleLinkedListNonRecursive.removeFirst();
 				menuListaDuplaN();
 			} catch (Exception e) {
 				menuListaDuplaN();
@@ -573,7 +573,7 @@ public class EstruturasLineares {
 				menuListaDuplaN();
 			}
 		case 9:
-			// doubleLinkedListNonRecursive.toString();
+			doubleLinkedListNonRecursive.toString();
 			menuListaDuplaN();
 			
 		case 10:
@@ -645,7 +645,7 @@ public class EstruturasLineares {
 			}
 			
 		case 5: // INFORMACOES NA ESTRUTURAS
-			// singleLinkedListNonRecursive.toString();
+			singleLinkedListNonRecursive.toString();
 			menuListaSimplesR();
 			
 		case 6:
@@ -717,7 +717,7 @@ public class EstruturasLineares {
 			}
 			
 		case 5:
-			// singleLinkedListNonRecursive.toString();
+			singleLinkedListNonRecursive.toString();
 			menuListaSimplesN();
 			
 		case 6:
