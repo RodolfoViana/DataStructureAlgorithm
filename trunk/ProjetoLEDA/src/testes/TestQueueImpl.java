@@ -93,10 +93,6 @@ public class TestQueueImpl {
 		q1.dequeue();
 		System.out.print("Head 2: ");
 		System.out.println(q1.head());
-		
-		q1.dequeue();
-		System.out.print("Head 3: ");
-		System.out.println(q1.head());
 	}
 	
 	
