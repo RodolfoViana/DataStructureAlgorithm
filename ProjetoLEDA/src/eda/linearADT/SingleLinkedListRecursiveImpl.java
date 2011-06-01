@@ -2,6 +2,7 @@ package eda.linearADT;
 
 import eda.util.ADTNoSuchElement;
 import eda.util.ADTOverflowException;
+import eda.util.ADTUnderflowException;
 
 /**
  * Universidade Federal de Campina Grande
@@ -30,8 +31,7 @@ import eda.util.ADTOverflowException;
  * eda.util.Constantes para inicializar os valores internos de sua estrutura.
  * Faca protected qualquer outro metodo auxiliar.
  */
-public class SingleLinkedListRecursiveImpl<E extends Comparable<E>> implements
-		LinkedList<E> {
+public class SingleLinkedListRecursiveImpl<E> implements LinkedList<E> {
 
 	private E element;
 	private LinkedList<E> head;
@@ -128,7 +128,7 @@ public class SingleLinkedListRecursiveImpl<E extends Comparable<E>> implements
 	}
 
 	/**
-	 * 
+	 * Invertes os elementos da lista
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
@@ -151,19 +151,49 @@ public class SingleLinkedListRecursiveImpl<E extends Comparable<E>> implements
 	/**
 	 * Metodo que retorna o maior valor de uma lista
 	 */
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override
 	public int maximum() {
-		// TODO Auto-generated method stub
-		return 0;
+		E resp = null;
+
+		SingleLinkedListRecursiveImpl aux = this;
+
+		for (int i = 0; i < size(); i++) {
+			if (resp == null){
+				resp = (E) aux.getElement();
+			} else {
+				if ((Integer) resp < (Integer) aux.getElement()){
+					resp = (E) aux.getElement();
+				}
+			}
+			aux = (SingleLinkedListRecursiveImpl) aux.getNext();
+		}
+
+		return (Integer) resp;
 	}
 
 	/**
 	 * Metodo que retorna o menor valor de uma lista
 	 */
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override
 	public int minimum() {
-		// TODO Auto-generated method stub
-		return 0;
+		E resp = null;
+
+		SingleLinkedListRecursiveImpl aux = this;
+
+		for (int i = 0; i < size(); i++) {
+			if (resp == null){
+				resp = (E) aux.getElement();
+			} else {
+				if ((Integer) resp > (Integer) aux.getElement()){
+					resp = (E) aux.getElement();
+				}
+			}
+			aux = (SingleLinkedListRecursiveImpl) aux.getNext();
+		}
+
+		return (Integer) resp;
 	}
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
@@ -182,7 +212,29 @@ public class SingleLinkedListRecursiveImpl<E extends Comparable<E>> implements
 	}
 
 	// metodos auxiliares
-
+	
+	public E removeLast() throws ADTUnderflowException {
+		E elementoRemovido = last();
+		remove(elementoRemovido);
+		return elementoRemovido;
+	}
+	
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	public E last() throws ADTUnderflowException {
+		E elementoRemovido = getElement();
+		
+		if (isEmpty()) {
+			throw new ADTUnderflowException();
+		}
+		if (getNext().isEmpty()) {
+			elementoRemovido = getElement();
+		} else {
+			elementoRemovido = (E) ((SingleLinkedListRecursiveImpl) getNext()).last();
+		}
+		
+		return elementoRemovido;
+	}
+	
 	/**
 	 * @return element
 	 */
@@ -205,7 +257,22 @@ public class SingleLinkedListRecursiveImpl<E extends Comparable<E>> implements
 		this.next = next;
 	}
 	
-	
-	
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@Override
+	public String toString() {
+		String resp = "{";
+
+		SingleLinkedListRecursiveImpl aux = this;
+
+		for (int i = 0; i < size(); i++) {
+			resp = resp + ((E) aux.getElement()).toString() + ",";
+			aux = (SingleLinkedListRecursiveImpl) aux.getNext();
+		}
+
+		resp = resp + "}";
+		resp = resp.replaceFirst(",}", "}");
+
+		return resp;
+	}
 
 }
